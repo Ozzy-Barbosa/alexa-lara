@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# El comando npm run configure -- https://tu-dominio.com añade el sitemap real.

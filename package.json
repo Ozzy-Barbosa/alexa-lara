@@ -1,0 +1,11 @@
+{
+  "name": "alexa-lara-fotografia",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Portafolio editorial de Alexa Lara. HTML, CSS y JavaScript sin dependencias.",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "check": "node --check script.js && node --check data.js && node scripts/check-site.mjs",
+    "configure": "node scripts/configure-site.mjs"
+  }
+}
