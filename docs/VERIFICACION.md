@@ -2,9 +2,9 @@
 
 Revisión del 1 de octubre de 2026, sobre el sitio local y la publicación en GitHub Pages.
 
-## Iteración V5 — identidad fotográfica propia, revisión local
+## Iteración V5 — identidad fotográfica propia
 
-**Estado: preparada y comprobada en local; publicación pendiente de confirmar.** El despliegue anterior de V4 no acredita que esta nueva dirección visual esté disponible en la URL pública.
+**Estado: publicada y comprobada.** El código `44fde4db0eb784703863e943a253dcdbce69a3ee` se desplegó correctamente. La comprobación pública independiente está registrada en `PUBLICACION.md`.
 
 ### Cambio visual
 
@@ -30,9 +30,11 @@ Portada fotográfica con titulares compactos en DM Sans, paleta carbón, neutros
 - El contraste de las combinaciones de texto se revisó a partir de los valores CSS y superó la comprobación realizada. Se reforzó el borde de los campos del formulario. Esta comprobación estática no constituye una auditoría completa de accesibilidad ni mide por sí sola el contraste sobre todos los encuadres fotográficos.
 - El tratamiento de `prefers-reduced-motion` se comprobó en el entorno simulado. Las pruebas VM no sustituyen un navegador ni prueban un cambio real de preferencia del sistema operativo.
 
-### Pendiente para cerrar V5
+### Comprobación pública de V5
 
-- Confirmar el despliegue de V5 e inspeccionar la URL pública. No se atribuye a esta iteración la publicación ya comprobada de V4.
+- Despliegue `36960320500` completado con éxito; diez archivos de texto y cuatro fotografías principales HTTP 200 y coincidentes con local.
+- Revisión pública a 1440 px: DM Sans, fondo carbón y portada nueva visibles. Captura pública local: `.verification/pages-v5-portada.png`.
+- Revisión pública a 390 px: selección de escena con Enter, menú, filtro Editorial (6), visor y Escape; formulario completo hasta vista previa con datos ficticios. No se enviaron mensajes. Ninguna imagen con `src` cargado rota y sin errores de consola observados; sin desbordamiento horizontal.
 
 El WhatsApp real y los datos pendientes del aviso inicial siguen sin inventarse. V5 no incorpora CRM, almacenamiento de consultas ni nuevas condiciones comerciales. Se conservan los registros de V4 y V3 a continuación como historial de esas versiones.
 

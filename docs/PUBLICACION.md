@@ -2,6 +2,20 @@
 
 Fecha: 1 de octubre de 2026.
 
+## Actualización V5 — identidad fotográfica propia
+
+- Código verificado: `44fde4db0eb784703863e943a253dcdbce69a3ee`.
+- [Despliegue de V5](https://github.com/Ozzy-Barbosa/alexa-lara/actions/runs/36960320500): compilación y publicación `success` (2 de octubre de 2026, 03:28 UTC; 1 de octubre local).
+- URL pública: [Alexa Lara Fotografía](https://ozzy-barbosa.github.io/alexa-lara/).
+- Diez archivos de texto HTTP 200 y coincidentes con local, normalizando solo finales de línea: HTML, CSS, JavaScript, catálogo, privacidad, manifiesto, favicon, sitemap, robots y 404.
+- Tres fotografías de portada en su variante grande y el retrato personal de Alexa en variante 800 respondieron HTTP 200 y coincidieron por SHA-256. El catálogo completo de 22 obras se conservó sin cambios.
+- Navegador público a 1440 px: portada V5, tipografía DM Sans y fondo carbón `rgb(17,19,20)` confirmados visualmente. Captura local de producción: `.verification/pages-v5-portada.png`.
+- Navegador público a 390 px: escena Editorial activada con Enter; menú abre y cierra; filtro Editorial muestra 6 fotografías; visor abre y Escape cierra. Sin desbordamiento horizontal.
+- Formulario público probado con datos ficticios hasta la vista previa: servicio Retrato personal, fecha por definir y ubicación por sugerir. No se enviaron mensajes ni se creó ninguna reserva. Sin errores de consola ni imágenes cargadas con `src` real rotas observadas.
+- La vista final vuelve a la portada sin datos de prueba; las funciones y pruebas locales de V5 constan en `VERIFICACION.md`.
+
+El teléfono oficial de WhatsApp y los datos pendientes del aviso inicial siguen pendientes del cliente. Esta iteración no altera condiciones comerciales ni añade almacenamiento de consultas.
+
 ## Actualización V4 — identidad, consultas y movimiento
 
 - Código verificado: `81f97ab4214ea90b1322dac9ec245c336d212a60`.

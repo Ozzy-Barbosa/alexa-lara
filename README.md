@@ -10,7 +10,7 @@ Dirección configurada para GitHub Pages: [Alexa Lara Fotografía](https://ozzy-
 
 ## Esta versión
 
-La iteración **V5 está preparada y comprobada en local; su publicación está pendiente de confirmar**. Renueva la identidad visual y conserva las funciones de consulta de V4. El registro de la publicación anterior permanece en `docs/PUBLICACION.md`; las pruebas V5 y sus límites, en `docs/VERIFICACION.md`. Que la URL pública responda no confirma por sí solo que muestre esta última versión.
+La iteración **V5 está publicada y comprobada en GitHub Pages**. Renueva la identidad visual y conserva las funciones de consulta de V4. El despliegue del código `44fde4d`, la comparación de los archivos públicos y la revisión visual de escritorio y móvil están registrados en `docs/PUBLICACION.md`; las pruebas locales y sus límites, en `docs/VERIFICACION.md`.
 
 - Identidad de estudio fotográfico contemporáneo: negro carbón, blanco frío, grises plata y salvia clara; titulares grandes y compactos en DM Sans.
 - Portada fotográfica inmersiva con tres escenas manuales: Exteriores, Editorial y Retratos. Selector con teclado y estado activo, sin reproducción automática.
