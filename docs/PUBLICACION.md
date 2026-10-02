@@ -4,6 +4,16 @@ Fecha: 1 de octubre de 2026.
 
 ## Actualización V6 — identidad vino, producto y tarjeta digital
 
+### Cierre: desvanecido negro aprobado
+
+- Aclaración del usuario aplicada: negro fotográfico con desvanecido; vino solo en los acentos del inicio, sin panel grande vino. Se conserva una imagen, la tipografía serif solicitada, 32 fotografías, Producto, FAQ, formulario y tarjeta.
+- Versión final de código comprobada: `1783e9f098ee07e688bffa4010d7b990e5aa7c19`.
+- [Despliegue final](https://github.com/Ozzy-Barbosa/alexa-lara/actions/runs/36964007731): `completed / success`.
+- Comparación remota repetida: **84/84 archivos HTTP 200 y coincidentes**. La caché de CSS antiguo detectada durante QA se resolvió versionando los enlaces de estilos y scripts; no fue necesario cambiar protecciones del navegador.
+- Inspección pública a 1440 y 390 px: fotografía y desvanecido negro correctos, base `rgb(17,19,20)`, acentos vino, sin desplazamiento lateral ni imágenes cargadas rotas. La dirección normal, sin parámetros de prueba, también muestra el resultado. Captura final `.verification/pages-v6-portada.png`.
+
+### Registro de la publicación inicial V6
+
 - Código principal: `880b9abcd020b2951ebbfb065955d154c3cf0fc7`; formato exacto de QR/VCF publicado en `ab9cc4c712832a5897241146093cce121e5f033f`.
 - [Despliegue de V6 y descargas verificadas](https://github.com/Ozzy-Barbosa/alexa-lara/actions/runs/36963198594): build y deploy `success`, 2 de octubre de 2026 04:08 UTC / 1 de octubre local.
 - [Sitio público](https://ozzy-barbosa.github.io/alexa-lara/) y [tarjeta digital](https://ozzy-barbosa.github.io/alexa-lara/tarjeta.html).

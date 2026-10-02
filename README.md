@@ -12,7 +12,7 @@ Dirección configurada para GitHub Pages: [Alexa Lara Fotografía](https://ozzy-
 
 La iteración **V6 está publicada y comprobada en GitHub Pages**. Incorpora fotografías entregadas por la clienta, una identidad más formal, contacto confirmado y tarjeta digital. El despliegue, la comparación de 84 archivos públicos y la revisión de escritorio y móvil están registrados en `docs/PUBLICACION.md`; las pruebas y sus límites, en `docs/VERIFICACION.md`.
 
-**Ajuste solicitado al cierre:** conservar el inicio fotográfico integrado en negro con desvanecido, siguiendo la referencia V5, y reservar el vino para acentos discretos. La comprobación de este ajuste de portada está pendiente; no cambia el registro de publicación de V6 anterior.
+**Ajuste solicitado al cierre, publicado y comprobado:** se conserva el inicio fotográfico integrado en negro con desvanecido, siguiendo la referencia del cliente, y se reserva el vino para los acentos del inicio. La revisión final corresponde a `1783e9f`, con estilos versionados para evitar que el navegador mezcle la página nueva con CSS antiguo.
 
 - Identidad formal en negro y marfil con acentos vino: titulares Cormorant Garamond y lectura en DM Sans. La portada integra una sola fotografía protagonista en un fondo negro con desvanecido, sin dividir el inicio en una mitad vino y otra fotográfica.
 - Galería oscura, presentación de Alexa con retratos confirmados y sesiones con imágenes pertinentes. Composición adaptable a móvil.
