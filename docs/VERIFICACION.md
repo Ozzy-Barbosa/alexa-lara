@@ -2,6 +2,40 @@
 
 Revisión del 1 de octubre de 2026, sobre el sitio local y la publicación en GitHub Pages.
 
+## Iteración V5 — identidad fotográfica propia, revisión local
+
+**Estado: preparada y comprobada en local; publicación pendiente de confirmar.** El despliegue anterior de V4 no acredita que esta nueva dirección visual esté disponible en la URL pública.
+
+### Cambio visual
+
+Portada fotográfica con titulares compactos en DM Sans, paleta carbón, neutros plata y salvia clara, y selector manual de Exteriores, Editorial y Retratos. La galería conserva 22 obras, ahora sin marcos decorativos; la presentación usa un díptico ortogonal con los dos retratos confirmados y las sesiones un tríptico fotográfico. Se eliminaron parallax, inclinaciones y cinta animada continua. Las FAQ, el formulario de dos pasos y el aviso inicial de privacidad continúan disponibles.
+
+### Comprobado en navegador local
+
+- Diseño inspeccionado a 1440, 768, 390 y 360 px, sin desbordamiento horizontal observado. En 360 px no se encontraron imágenes cargadas con un `src` real roto.
+- Las tres escenas de portada se seleccionan manualmente. El selector responde a Enter y continúa funcionando con el movimiento pausado.
+- Los dos controles de pausa sincronizan su estado. Con la pausa activa, la animación de portada queda desactivada; no se cambió la preferencia del sistema operativo durante esta comprobación.
+- Filtro Editorial: 6 fotografías; el visor avanza a 2/6 y Escape cierra correctamente.
+- La acción de una sesión editorial preselecciona «Editorial y estudio» en el formulario.
+- Formulario recorrido en dos pasos con datos ficticios: mensaje preparado con La Paz como lugar y fecha «Por definir». El enlace de WhatsApp permanece oculto al no haber número configurado. No se enviaron consultas.
+- «Editar mi idea» conserva los datos. Al regresar, el campo activo queda visible por debajo de la cabecera fija.
+- Menú móvil: abre y cierra. Las FAQ se abren con Enter.
+- Galería completa: 12 → 21 → 22 fotografías; el botón de ampliación se oculta al terminar.
+- Aviso de privacidad revisado a 390 px: tipografía y colores consistentes, sin desbordamiento; se conserva `noindex,follow` y el texto legal inicial sin cambios.
+- Sin errores de consola observados. Capturas guardadas en `previews/v5-portada-desktop.png`, `v5-portada-movil.png`, `v5-galeria-desktop.png`, `v5-biografia-desktop.png`, `v5-contacto-desktop.png` y `v5-formulario-movil.png`.
+
+### Comprobaciones estáticas y simuladas
+
+- Diez pruebas de interacciones superadas en Node.js. Cubren los siete recorridos anteriores de formulario y movimiento, más el inicio y foco del selector manual, su funcionamiento con movimiento reducido o pausa y la alternativa estática cuando la portada está incompleta.
+- El contraste de las combinaciones de texto se revisó a partir de los valores CSS y superó la comprobación realizada. Se reforzó el borde de los campos del formulario. Esta comprobación estática no constituye una auditoría completa de accesibilidad ni mide por sí sola el contraste sobre todos los encuadres fotográficos.
+- El tratamiento de `prefers-reduced-motion` se comprobó en el entorno simulado. Las pruebas VM no sustituyen un navegador ni prueban un cambio real de preferencia del sistema operativo.
+
+### Pendiente para cerrar V5
+
+- Confirmar el despliegue de V5 e inspeccionar la URL pública. No se atribuye a esta iteración la publicación ya comprobada de V4.
+
+El WhatsApp real y los datos pendientes del aviso inicial siguen sin inventarse. V5 no incorpora CRM, almacenamiento de consultas ni nuevas condiciones comerciales. Se conservan los registros de V4 y V3 a continuación como historial de esas versiones.
+
 ## Iteración V4 — interacciones y claridad
 
 **Estado: publicada y comprobada.** El código `81f97ab4214ea90b1322dac9ec245c336d212a60` se desplegó correctamente. Las pruebas detalladas a continuación se realizaron en local y la comprobación independiente de la URL pública consta en `PUBLICACION.md`.
@@ -83,7 +117,7 @@ Acceso comprobado al perfil de Instagram y a las imágenes renderizadas de su cu
 
 ## Límites
 
-El WhatsApp real y el dominio propio siguen pendientes. No se probó un envío real por WhatsApp ni se activó un backend. La publicación de V4 está documentada en el [registro de publicación](PUBLICACION.md). La activación automática del ajuste de movimiento del sistema se revisó en código y en un entorno simulado; los controles manuales sí se probaron en navegador.
+El WhatsApp real y el dominio propio siguen pendientes. No se probó un envío real por WhatsApp ni se activó un backend. La publicación de V4 está documentada en el [registro de publicación](PUBLICACION.md); el estado de V5 figura al comienzo de este documento y aún requiere confirmación pública. La activación automática del ajuste de movimiento del sistema se revisó en código y en un entorno simulado; los controles manuales sí se probaron en navegador.
 
 Las comprobaciones visuales se realizaron con el navegador integrado. La herramienta de navegador independiente no pudo iniciar su motor instalado, por lo que se utilizó el navegador disponible sin alterar sus protecciones.
 

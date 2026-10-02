@@ -10,7 +10,7 @@ import { test } from "node:test";
 const script = fs.readFileSync(new URL("../script.js", import.meta.url), "utf8");
 const html = fs.readFileSync(new URL("../index.html", import.meta.url), "utf8");
 
-function makeFixture({ reduced = false, whatsapp = "", clipboardFailure = false } = {}) {
+function makeFixture({ reduced = false, whatsapp = "", clipboardFailure = false, missingHeroPanel = "" } = {}) {
   let document;
   let now = new Date(2026, 9, 1, 12).getTime();
   const frames = new Map();
@@ -109,20 +109,33 @@ function makeFixture({ reduced = false, whatsapp = "", clipboardFailure = false 
   const toggles = [new Element("motion-hero"), new Element("motion-footer")];
   const nestedMotionLabel = new Element("motion-label");
   toggles[0].querySelector = selector => selector === "[data-motion-label]" ? nestedMotionLabel : null;
-  const hero = new Element("hero");
-  const parallax = new Element("parallax");
-  parallax.dataset.parallax = "-0.02";
+  const heroControls = new Element("hero-controls");
+  heroControls.hidden = true;
+  const heroNames = ["exteriores", "editorial", "retratos"];
+  const heroButtons = heroNames.map(scene => {
+    const button = new Element(`hero-button-${scene}`);
+    button.dataset.heroScene = scene;
+    return button;
+  });
+  const heroPanels = heroNames.filter(scene => scene !== missingHeroPanel).map(scene => {
+    const panel = new Element(`hero-panel-${scene}`);
+    panel.id = `existing-panel-${scene}`;
+    panel.dataset.heroPanel = scene;
+    panel.hidden = scene !== "exteriores";
+    return panel;
+  });
   const serviceLink = new Element("service-link");
   serviceLink.dataset.service = "Editorial y estudio";
   const groups = new Map([
-    [".motion-toggle", toggles], ["[data-parallax]", [parallax]],
+    [".motion-toggle", toggles],
+    ["[data-hero-scene]", heroButtons], ["[data-hero-panel]", heroPanels],
     ["[data-step-indicator]", indicators], ["[data-service]", [serviceLink]]
   ]);
   document = new Element("document");
   Object.assign(document, {
     readyState: "complete", baseURI: "https://ozzy-barbosa.github.io/alexa-lara/",
     body: new Element("body"), documentElement: new Element("html"), activeElement: null,
-    querySelector: selector => selector === ".hero-composition" ? hero : ids.get(selector.slice(1)) || null,
+    querySelector: selector => selector === "[data-hero-controls]" ? heroControls : ids.get(selector.slice(1)) || null,
     querySelectorAll: selector => groups.get(selector) || [],
     getElementById: id => ids.get(id) || null
   });
@@ -130,7 +143,7 @@ function makeFixture({ reduced = false, whatsapp = "", clipboardFailure = false 
   const media = new Map();
   for (const [query, matches] of [
     ["(prefers-reduced-motion: reduce)", reduced],
-    ["(min-width: 901px)", true], ["(hover: hover) and (pointer: fine)", true]
+    ["(min-width: 901px)", true]
   ]) {
     const match = new Element(query);
     match.matches = matches;
@@ -178,7 +191,8 @@ function makeFixture({ reduced = false, whatsapp = "", clipboardFailure = false 
   const complete = () => { input("nombre", "  Vera  "); input("consentimiento", true); submit(); };
   return {
     controls, steps, form, ids, preview, result, indicators, document, window,
-    toggles, nestedMotionLabel, hero, parallax, serviceLink, media, clipboard,
+    toggles, nestedMotionLabel, serviceLink, media, clipboard,
+    heroControls, heroButtons, heroPanels,
     input, click, submit, flushFrames, fillFirstStep, complete,
     advanceDay: () => { now += 24 * 60 * 60 * 1000; }
   };
@@ -202,6 +216,51 @@ test("HTML exposes both fieldsets and non-submitting navigation controls", () =>
   }
 });
 
+test("manual hero selector initializes one scene and retains focus on its activated button", () => {
+  const f = makeFixture();
+  assert.equal(f.heroControls.hidden, false);
+  assert.equal(f.heroControls.getAttribute("role"), "group");
+  assert.equal(f.heroControls.dataset.activeScene, "exteriores");
+  assert.deepEqual(f.heroPanels.filter(panel => !panel.hidden).map(panel => panel.dataset.heroPanel), ["exteriores"]);
+  for (const button of f.heroButtons) {
+    assert.equal(button.type, "button");
+    assert.equal(button.getAttribute("aria-controls"), `existing-panel-${button.dataset.heroScene}`);
+    assert.equal(button.getAttribute("aria-pressed"), String(button.dataset.heroScene === "exteriores"));
+  }
+  const editorial = f.heroButtons[1];
+  editorial.focus();
+  editorial.emit("click");
+  assert.equal(f.document.activeElement, editorial);
+  assert.equal(f.heroControls.dataset.activeScene, "editorial");
+  assert.deepEqual(f.heroPanels.filter(panel => !panel.hidden).map(panel => panel.dataset.heroPanel), ["editorial"]);
+  assert.equal(f.heroButtons[0].getAttribute("aria-pressed"), "false");
+  assert.equal(editorial.getAttribute("aria-pressed"), "true");
+  f.advanceDay();
+  f.flushFrames();
+  assert.equal(f.heroControls.dataset.activeScene, "editorial", "Time and rendering frames do not rotate the hero");
+  f.heroButtons[2].emit("click");
+  assert.deepEqual(f.heroPanels.filter(panel => !panel.hidden).map(panel => panel.dataset.heroPanel), ["retratos"]);
+});
+
+test("manual hero scene selection remains available with reduced motion or manual pause", () => {
+  for (const reduced of [true, false]) {
+    const f = makeFixture({ reduced });
+    if (!reduced) f.toggles[0].emit("click");
+    f.heroButtons[2].emit("click");
+    assert.equal(f.document.documentElement.dataset.motion, "reduced");
+    assert.equal(f.heroControls.dataset.activeScene, "retratos");
+    assert.equal(f.heroButtons[2].disabled, false);
+    assert.deepEqual(f.heroPanels.filter(panel => !panel.hidden).map(panel => panel.dataset.heroPanel), ["retratos"]);
+  }
+});
+
+test("an incomplete hero retains the static first scene and does not reveal unusable controls", () => {
+  const f = makeFixture({ missingHeroPanel: "editorial" });
+  assert.equal(f.heroControls.hidden, true);
+  assert.deepEqual(f.heroPanels.filter(panel => !panel.hidden).map(panel => panel.dataset.heroPanel), ["exteriores"]);
+  assert.equal(f.form.dataset.formState, "step-1", "Other site interactions still initialize");
+});
+
 test("system reduced motion and both pause controls stay synchronized", () => {
   const f = makeFixture({ reduced: true });
   assert.equal(f.document.documentElement.dataset.motion, "reduced");
@@ -209,9 +268,7 @@ test("system reduced motion and both pause controls stay synchronized", () => {
     assert.equal(toggle.disabled, true);
     assert.equal(toggle.getAttribute("aria-pressed"), "true");
   });
-  f.hero.emit("pointermove", { pointerType: "mouse", clientX: 390, clientY: 30 });
-  f.flushFrames();
-  assert.equal(f.hero.styles.get("--pointer-x"), "0deg");
+  assert.equal(f.document.body.classList.contains("motion-paused"), true);
   f.media.get("(prefers-reduced-motion: reduce)").change(false);
   assert.equal(f.nestedMotionLabel.textContent, "Pausar movimiento");
   f.toggles.forEach(toggle => assert.equal(toggle.disabled, false));
@@ -222,12 +279,10 @@ test("system reduced motion and both pause controls stay synchronized", () => {
   assert.equal(f.toggles[0].getAttribute("aria-pressed"), "true", "Manual pause survives OS preference changes");
   f.toggles[1].emit("click");
   f.toggles.forEach(toggle => assert.equal(toggle.getAttribute("aria-pressed"), "false"));
-  f.hero.emit("pointermove", { pointerType: "mouse", clientX: 390, clientY: 30 });
-  f.flushFrames();
-  assert.notEqual(f.hero.styles.get("--pointer-x"), "0deg");
+  assert.equal(f.document.body.classList.contains("motion-paused"), false);
   f.media.get("(prefers-reduced-motion: reduce)").change(true);
-  assert.equal(f.hero.styles.get("--pointer-x"), "0deg");
-  assert.equal(f.hero.styles.get("--pointer-y"), "0deg");
+  assert.equal(f.document.body.classList.contains("motion-paused"), true);
+  assert.equal(f.document.documentElement.dataset.motion, "reduced");
 });
 
 test("step one validates service and local date, then preserves disabled values", () => {

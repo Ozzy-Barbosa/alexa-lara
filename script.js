@@ -67,46 +67,13 @@
       if (document.body.classList.contains("menu-open") &&
           !menu?.contains(event.target) && !menuToggle?.contains(event.target)) setMenu(false);
     });
-    desktop.addEventListener("change", () => { setMenu(false); resetPointerTilt(); requestScrollUpdate(); });
+    desktop.addEventListener("change", () => { setMenu(false); requestScrollUpdate(); });
     setMenu(false);
 
     // Motion never overrides the visitor's system preference.
     const motionToggles = $$(".motion-toggle");
-    const heroComposition = $(".hero-composition");
-    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
     let manuallyPaused = false;
     const motionIsOff = () => reducedMotion.matches || manuallyPaused;
-    let pointerFrame = 0;
-    let pointerPosition = null;
-    function resetPointerTilt() {
-      window.cancelAnimationFrame(pointerFrame);
-      pointerFrame = 0;
-      pointerPosition = null;
-      heroComposition?.style.setProperty("--pointer-x", "0deg");
-      heroComposition?.style.setProperty("--pointer-y", "0deg");
-    }
-    const renderPointerTilt = () => {
-      pointerFrame = 0;
-      if (!heroComposition || !pointerPosition || motionIsOff() || !desktop.matches || !finePointer.matches) {
-        resetPointerTilt();
-        return;
-      }
-      const bounds = heroComposition.getBoundingClientRect();
-      if (!bounds.width || !bounds.height) return;
-      const x = Math.max(-1, Math.min(1, (pointerPosition.x - bounds.left) / bounds.width * 2 - 1));
-      const y = Math.max(-1, Math.min(1, (pointerPosition.y - bounds.top) / bounds.height * 2 - 1));
-      heroComposition.style.setProperty("--pointer-x", `${(x * 2.2).toFixed(2)}deg`);
-      heroComposition.style.setProperty("--pointer-y", `${(-y * 1.6).toFixed(2)}deg`);
-    };
-    heroComposition?.addEventListener("pointermove", (event) => {
-      if (event.pointerType === "touch" || motionIsOff() || !desktop.matches || !finePointer.matches) return;
-      pointerPosition = { x: event.clientX, y: event.clientY };
-      if (!pointerFrame) pointerFrame = window.requestAnimationFrame(renderPointerTilt);
-    }, { passive: true });
-    heroComposition?.addEventListener("pointerleave", resetPointerTilt);
-    heroComposition?.addEventListener("pointercancel", resetPointerTilt);
-    finePointer.addEventListener("change", resetPointerTilt);
-    window.addEventListener("blur", resetPointerTilt);
     let revealObserver;
     const reveal = (element) => {
       element.classList.add("is-visible");
@@ -146,7 +113,6 @@
       });
       if (paused) {
         $$(".reveal-ready").forEach(reveal);
-        resetPointerTilt();
       }
       requestScrollUpdate();
     };
@@ -158,7 +124,6 @@
 
     const header = $(".site-header");
     const progress = $("#scroll-progress");
-    const parallaxElements = $$("[data-parallax]");
     let scrollFrame = 0;
     function updateScroll() {
       scrollFrame = 0;
@@ -167,12 +132,6 @@
         const height = document.documentElement.scrollHeight - window.innerHeight;
         progress.style.transform = `scaleX(${height > 0 ? Math.min(1, Math.max(0, window.scrollY / height)) : 0})`;
       }
-      parallaxElements.forEach((element) => {
-        const configuredFactor = Number(element.dataset.parallax);
-        const factor = Number.isFinite(configuredFactor) ? configuredFactor : 0.035;
-        const offset = motionIsOff() || !desktop.matches ? 0 : Math.min(40, Math.max(-30, window.scrollY * factor));
-        element.style.setProperty("--parallax-y", `${offset}px`);
-      });
     }
     function requestScrollUpdate() {
       if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateScroll);
@@ -181,6 +140,47 @@
     window.addEventListener("resize", requestScrollUpdate, { passive: true });
     applyMotionPreference();
     observeReveals($$("[data-reveal]"));
+
+    // The cover changes only when its native buttons are activated. Without JS,
+    // the first photograph stays visible and the optional controls stay hidden.
+    const heroControls = $("[data-hero-controls]");
+    const heroSceneButtons = $$("[data-hero-scene]");
+    const heroScenePanels = $$("[data-hero-panel]");
+    const heroSceneNames = ["exteriores", "editorial", "retratos"];
+    const heroScenes = new Map(heroScenePanels.map(panel => [panel.dataset.heroPanel, panel]));
+    const completeHeroScenes = heroSceneNames.every(scene =>
+      heroScenes.has(scene) && heroSceneButtons.some(button => button.dataset.heroScene === scene)
+    );
+    if (heroControls && completeHeroScenes) {
+      heroControls.setAttribute("role", "group");
+      if (!heroControls.hasAttribute("aria-label") && !heroControls.hasAttribute("aria-labelledby")) {
+        heroControls.setAttribute("aria-label", "Elegir colección destacada");
+      }
+      const showHeroScene = (scene) => {
+        if (!heroSceneNames.includes(scene)) return;
+        heroScenePanels.forEach(panel => {
+          const active = panel.dataset.heroPanel === scene;
+          panel.hidden = !active;
+          panel.classList.toggle("is-active", active);
+        });
+        heroSceneButtons.forEach(button => {
+          const active = button.dataset.heroScene === scene;
+          button.setAttribute("aria-pressed", String(active));
+          button.classList.toggle("is-active", active);
+        });
+        heroControls.dataset.activeScene = scene;
+      };
+      heroSceneButtons.forEach(button => {
+        const panel = heroScenes.get(button.dataset.heroScene);
+        if (!panel || !heroSceneNames.includes(button.dataset.heroScene)) return;
+        if (!panel.id) panel.id = `hero-panel-${button.dataset.heroScene}`;
+        button.type = "button";
+        button.setAttribute("aria-controls", panel.id);
+        button.addEventListener("click", () => showHeroScene(button.dataset.heroScene));
+      });
+      showHeroScene("exteriores");
+      heroControls.hidden = false;
+    }
 
     // Only published records with an actual source image enter the portfolio.
     const photos = (Array.isArray(config.photos) ? config.photos : []).filter((photo) =>

@@ -6,21 +6,22 @@ Repositorio: [Ozzy-Barbosa/alexa-lara](https://github.com/Ozzy-Barbosa/alexa-lar
 
 Dirección configurada para GitHub Pages: [Alexa Lara Fotografía](https://ozzy-barbosa.github.io/alexa-lara/).
 
-![Portada del sitio](docs/previews/v3-portada-desktop.png)
+![Portada V5 del sitio](docs/previews/v5-portada-desktop.png)
 
 ## Esta versión
 
-La iteración **V4 está publicada y comprobada en GitHub Pages**: retrato personal corregido, FAQ, aviso inicial, formulario de dos pasos y movimiento accesible. La verificación pública del código `81f97ab` está registrada en `docs/PUBLICACION.md`; las pruebas locales y sus límites, en `docs/VERIFICACION.md`.
+La iteración **V5 está preparada y comprobada en local; su publicación está pendiente de confirmar**. Renueva la identidad visual y conserva las funciones de consulta de V4. El registro de la publicación anterior permanece en `docs/PUBLICACION.md`; las pruebas V5 y sus límites, en `docs/VERIFICACION.md`. Que la URL pública responda no confirma por sí solo que muestre esta última versión.
 
-- Dirección editorial cinematográfica: carbón con matiz oliva, marfil y acentos dorados mates, gran tipografía serif y portada de fotografías superpuestas como impresiones.
-- Galería enmarcada, presentación de Alexa en collage, sesiones con acabados de impresión y formulario con campos delimitados.
+- Identidad de estudio fotográfico contemporáneo: negro carbón, blanco frío, grises plata y salvia clara; titulares grandes y compactos en DM Sans.
+- Portada fotográfica inmersiva con tres escenas manuales: Exteriores, Editorial y Retratos. Selector con teclado y estado activo, sin reproducción automática.
+- Galería oscura sin marcos decorativos, presentación de Alexa en díptico ortogonal y sesiones como tríptico fotográfico. Composición adaptable a móvil.
 - **22 fotografías distintas** obtenidas del perfil [@aleroblesfotografia](https://www.instagram.com/aleroblesfotografia/) y sus colaboraciones visibles. Sin fotos de banco.
 - Galería con Retratos, Editorial, Familia y Exteriores; muestra 12 imágenes y permite cargar el resto.
 - Visor con anterior/siguiente, teclado, Escape, gestos táctiles y enlace a cada publicación original.
-- Entradas suaves, parallax discreto y progreso de lectura. Controles de pausa sincronizados en portada y footer, con respeto de la preferencia del sistema.
+- Microanimaciones finitas y progreso de lectura. Se retiraron parallax, inclinaciones y cinta continua; los dos controles de pausa están sincronizados y respetan la preferencia de movimiento reducido del sistema.
 - Seis preguntas frecuentes desplegables, disponibles también sin JavaScript.
 - Formulario en dos pasos: sesión, lugar, fecha e idea; después, nombre y consentimiento. Incluye revisión, corrección del mensaje, copia y contacto por Instagram; listo para WhatsApp al configurar el número real.
-- Retrato personal confirmado de Alexa en el collage, guardado en `assets/alexa/`, además del retrato del perfil profesional. No aumenta el número de obras de la galería.
+- Dos retratos confirmados de Alexa en el díptico: el profesional y el personal guardado en `assets/alexa/`. No aumentan el número de obras de la galería.
 - Aviso inicial de privacidad en `privacidad.html`, enlazado desde el formulario y el footer.
 - Imágenes locales WebP, tamaños adaptativos, carga diferida y dimensiones reservadas.
 - **6 posiciones adicionales reservadas** para nuevas fotografías, ocultas hasta completarlas.
@@ -33,10 +34,9 @@ Requiere Node.js para el servidor de desarrollo; el sitio publicado no lo necesi
 npm run dev
 # http://127.0.0.1:8000
 npm run check
-node --test scripts/test-interactions.mjs
 ```
 
-No requiere `npm install`. El servidor de desarrollo escucha únicamente en el equipo local. Las pruebas de interacciones usan un entorno simulado de Node.js: comprueban lógica y estados, pero no sustituyen las pruebas de navegador, teclado, renderizado o preferencia real de movimiento del sistema.
+No requiere `npm install`. El servidor de desarrollo escucha únicamente en el equipo local. `npm run check` incluye comprobaciones estáticas y diez pruebas de interacciones. Estas últimas usan un entorno simulado de Node.js: comprueban lógica y estados, pero no sustituyen las pruebas de navegador, teclado, renderizado o preferencia real de movimiento del sistema.
 
 ## Continuar con el cliente
 
@@ -48,8 +48,9 @@ No requiere `npm install`. El servidor de desarrollo escucha únicamente en el e
 | `script.js` | Galería, visor, menú y preparación de consultas |
 | `privacidad.html` | Aviso inicial, funcionamiento del formulario y datos del responsable pendientes |
 | `docs/PROMPT-DISENO-ALEXA.md` | Prompt reutilizable aplicado a este rediseño |
-| `docs/PROMPT-ESTILO-EDITORIAL-V3.md` | Dirección visual ampliada para la versión cinematográfica |
+| `docs/PROMPT-ESTILO-EDITORIAL-V3.md` | Dirección visual histórica de V3, sustituida por V5 |
 | `docs/PROMPT-INTERACCIONES-V4.md` | Formulario de dos pasos, FAQ, privacidad, identidad y comprobaciones |
+| `docs/PROMPT-IDENTIDAD-FOTOGRAFICA-V5.md` | Dirección visual actual y criterios para mantener una identidad propia |
 | `docs/ASSETS-INSTAGRAM.md` | Procedencia de cada foto y preparación de versiones web |
 | `docs/VERIFICACION.md` | Comprobaciones y límites de esta entrega |
 
@@ -101,8 +102,9 @@ Cuando se contrate un dominio propio, volver a ejecutar `npm run configure -- ht
 
 ## Evidencia visual
 
-Estas capturas corresponden a V3. La revisión V4 sigue siendo local; las comprobaciones realizadas y las pendientes figuran en `docs/VERIFICACION.md`.
+La portada V5 corresponde a la implementación local. Las capturas V3 se conservan como historial visual, no como representación del diseño actual. Las comprobaciones realizadas y las pendientes figuran en `docs/VERIFICACION.md`.
 
+- [Portada de escritorio V5](docs/previews/v5-portada-desktop.png)
 - [Portada móvil V3](docs/previews/v3-portada-movil.png)
 - [Galería V3](docs/previews/v3-galeria-desktop.png)
 - [Contacto V3](docs/previews/v3-contacto-desktop.png)

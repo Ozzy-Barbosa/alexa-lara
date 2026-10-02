@@ -27,6 +27,13 @@ for(const match of html.matchAll(/\b(?:src|href)="([^"]+)"/g)) {
   else if(!/^(?:https?:|mailto:|tel:|data:)/.test(value)) assert(fs.existsSync(path.join(root,value)),"Recurso HTML ausente: " + value);
 }
 assert.equal((html.match(/<h1\b/g)||[]).length,1,"Debe existir un único H1.");
+for (const scene of ["exteriores", "editorial", "retratos"]) {
+  assert(html.includes(`data-hero-scene="${scene}"`), "Falta botón de escena: " + scene);
+  assert(html.includes(`data-hero-panel="${scene}"`), "Falta panel de escena: " + scene);
+  assert(html.includes(`aria-controls="hero-panel-${scene}"`), "Control sin panel asociado: " + scene);
+}
+assert(html.includes('data-hero-controls role="group" aria-label="Cambiar fotografía de portada" hidden'), "Los controles requieren mejora progresiva.");
+assert(!html.includes("Cormorant"), "La dirección V5 no utiliza la tipografía de V3.");
 assert(!/unsplash|example\.com/i.test(html),"El HTML conserva referencias provisionales incorrectas.");
 assert(!/example\.com/.test(fs.readFileSync(path.join(root,"robots.txt"),"utf8")),"Robots conserva dominio ficticio.");
 JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
