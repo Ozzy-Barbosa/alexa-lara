@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-# El comando npm run configure -- https://tu-dominio.com añade el sitemap real.
+Sitemap: https://ozzy-barbosa.github.io/alexa-lara/sitemap.xml

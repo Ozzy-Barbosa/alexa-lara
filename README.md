@@ -4,11 +4,14 @@ Portafolio editorial para Alexa Lara, fotógrafa en La Paz y Ensenada. HTML, CSS
 
 Repositorio: [Ozzy-Barbosa/alexa-lara](https://github.com/Ozzy-Barbosa/alexa-lara).
 
-![Portada del sitio](docs/previews/portada-desktop.png)
+Dirección configurada para GitHub Pages: [Alexa Lara Fotografía](https://ozzy-barbosa.github.io/alexa-lara/).
+
+![Portada del sitio](docs/previews/v3-portada-desktop.png)
 
 ## Esta versión
 
-- Dirección de arte marfil / carbón / borgoña, titulares serif y composición fotográfica asimétrica.
+- Dirección editorial cinematográfica: carbón con matiz oliva, marfil y acentos dorados mates, gran tipografía serif y portada de fotografías superpuestas como impresiones.
+- Galería enmarcada, presentación de Alexa en collage, sesiones con acabados de impresión y formulario con campos delimitados.
 - **22 fotografías distintas** obtenidas del perfil [@aleroblesfotografia](https://www.instagram.com/aleroblesfotografia/) y sus colaboraciones visibles. Sin fotos de banco.
 - Galería con Retratos, Editorial, Familia y Exteriores; muestra 12 imágenes y permite cargar el resto.
 - Visor con anterior/siguiente, teclado, Escape, gestos táctiles y enlace a cada publicación original.
@@ -38,6 +41,7 @@ No requiere `npm install`. El servidor de desarrollo escucha únicamente en el e
 | `styles.css` | Colores, tipografía, composición, responsive y movimiento |
 | `script.js` | Galería, visor, menú y preparación de consultas |
 | `docs/PROMPT-DISENO-ALEXA.md` | Prompt reutilizable aplicado a este rediseño |
+| `docs/PROMPT-ESTILO-EDITORIAL-V3.md` | Dirección visual ampliada para la versión cinematográfica |
 | `docs/ASSETS-INSTAGRAM.md` | Procedencia de cada foto y preparación de versiones web |
 | `docs/VERIFICACION.md` | Comprobaciones y límites de esta entrega |
 
@@ -71,13 +75,19 @@ El comando escribe canonical, URL e imagen Open Graph absolutas, sitemap, robots
 3. Subir `index.html`, `styles.css`, `script.js`, `data.js`, `404.html`, `robots.txt`, `sitemap.xml`, `site.webmanifest` y `assets/` a la carpeta pública. `docs/`, `scripts/`, `package.json` y `.git/` no son necesarios en el hosting.
 4. Configurar HTTPS y la página 404 en el proveedor. Verificar el dominio en Search Console y enviar el sitemap.
 
-El repositorio en GitHub guarda el proyecto. Subir el código no activa automáticamente GitHub Pages ni publica un hosting.
+### GitHub Pages
+
+Fuente de publicación: rama `main`, carpeta raíz `/`. El archivo `.nojekyll` permite servir el sitio estático sin procesarlo con Jekyll. Una vez activado Pages, los cambios enviados a `main` generan la siguiente publicación.
+
+La dirección de esta entrega es `https://ozzy-barbosa.github.io/alexa-lara/`. Canonical, Open Graph, sitemap y enlaces 404 están configurados para esa subcarpeta. El estado de publicación se comprueba en los despliegues del repositorio; guardar un commit por sí solo no confirma que ya esté disponible en línea.
+
+Cuando se contrate un dominio propio, volver a ejecutar `npm run configure -- https://tu-dominio.com`, revisar DNS/HTTPS y publicar esos cambios. El número de WhatsApp y la selección definitiva de fotografías siguen sujetos a confirmación de Alexa.
 
 ## Evidencia visual
 
-- [Portada móvil](docs/previews/portada-movil.png)
-- [Galería](docs/previews/galeria-desktop.png)
-- [Contacto](docs/previews/contacto-desktop.png)
+- [Portada móvil V3](docs/previews/v3-portada-movil.png)
+- [Galería V3](docs/previews/v3-galeria-desktop.png)
+- [Contacto V3](docs/previews/v3-contacto-desktop.png)
 - [Perfil de Instagram verificado](docs/previews/instagram-perfil.png)
 
 El SEO incluye contenido local, metadatos y datos estructurados con información conocida. El posicionamiento también depende de contenido original, reputación y presencia local; no se garantiza una posición concreta.

@@ -2,6 +2,18 @@
 
 Revisión del 1 de octubre de 2026, sobre el sitio servido localmente.
 
+## Iteración visual V3 — editorial cinematográfica
+
+- Portada oscura, tipografía de gran escala, composiciones de impresiones superpuestas, marcos de galería, collage biográfico, tarjetas fotográficas y campos del formulario rediseñados.
+- Inspección en navegador a 1440, 768, 390 y 360 px. El ancho del documento no supera el de la ventana. Los elementos decorativos que salen de su contenedor no producen desplazamiento horizontal de la página.
+- Filtro Editorial: 6 fotos; visor avanza de 1/6 a 2/6; Escape cierra y devuelve el foco a «Ampliar Luz y color».
+- Galería completa: 12 → 21 → 22 fotografías, con botón de ampliación oculto al terminar.
+- Menú móvil abre y cierra al navegar. Formulario con nombre ficticio prepara el mensaje; WhatsApp permanece oculto sin número real. No se enviaron consultas.
+- Botón de pausa: elimina animaciones y desplazamiento parallax, conservando las inclinaciones estáticas de los marcos.
+- Se conserva el catálogo, el SEO y el contacto; no se añadieron fotografías externas ni dependencias. Se ajustó `sizes` al nuevo margen interior de las fotografías.
+- Capturas de esta iteración: `previews/v3-portada-desktop.png`, `previews/v3-portada-movil.png`, `previews/v3-galeria-desktop.png` y `previews/v3-contacto-desktop.png`.
+- Esta revisión visual se realizó inicialmente en local. El despliegue en GitHub Pages y su comprobación remota se registran por separado.
+
 ## Fuente de fotografías
 
 Acceso comprobado al perfil de Instagram y a las imágenes renderizadas de su cuadrícula: nombre «Alexa Lara Fotógrafa», 28 publicaciones y ubicación Ensenada–La Paz. Se guardaron copias locales de 24 imágenes de ese perfil, incluidas colaboraciones visibles. 22 integran la galería, una es el retrato de perfil y una tarjeta informativa se excluye. Véase [trazabilidad](ASSETS-INSTAGRAM.md).

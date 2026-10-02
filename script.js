@@ -247,7 +247,7 @@
       if (Number.isFinite(sourceWidth) && sourceWidth > 0 && Number.isFinite(fullWidth) &&
           fullWidth > sourceWidth && fullSource) {
         img.srcset = `${mediaURL(photo.src)} ${sourceWidth}w, ${fullSource} ${fullWidth}w`;
-        img.sizes = "(max-width:600px) calc((100vw - 54px)/2), (max-width:900px) calc((100vw - 84px)/2), (max-width:1100px) calc((100vw - 104px)/3), (min-width:1424px) 421px, calc((100vw - 160px)/3)";
+        img.sizes = "(max-width:600px) calc((100vw - 78px)/2), (max-width:900px) calc((100vw - 124px)/2), (max-width:1100px) calc((100vw - 164px)/3), (min-width:1424px) 401px, calc((100vw - 220px)/3)";
       }
       img.alt = photo.alt || photo.title || "Fotografía de Alexa Lara";
       img.width = width;
