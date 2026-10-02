@@ -2,6 +2,22 @@
 
 Fecha: 1 de octubre de 2026.
 
+## Actualización V4 — identidad, consultas y movimiento
+
+- Código verificado: `81f97ab4214ea90b1322dac9ec245c336d212a60`.
+- [Despliegue de V4](https://github.com/Ozzy-Barbosa/alexa-lara/actions/runs/36957576391): `success`, incluidas compilación y publicación.
+- URL pública: [Alexa Lara Fotografía](https://ozzy-barbosa.github.io/alexa-lara/).
+- Se compararon nueve archivos de texto remotos con la copia local, normalizando únicamente finales de línea: HTML principal, CSS, JavaScript, catálogo, privacidad, manifiesto, sitemap, robots y 404. Todos HTTP 200 y coincidentes.
+- Las dos variantes de la nueva foto de `@alexalrb` coincidieron byte a byte mediante SHA-256 y respondieron HTTP 200. Se conserva el catálogo anterior sin modificaciones.
+- Navegador público a 1440 px: retrato personal nuevo visible en la biografía, cinta con animación `ribbon-travel`, FAQ desplegable, ningún desbordamiento horizontal y ninguna imagen con `src` real rota observada.
+- Navegador público a 390 px: menú abre/cierra, formulario pasa por selección → nombre/consentimiento → mensaje preparado con datos ficticios. WhatsApp permanece oculto al no existir número confirmado. No se enviaron consultas a Alexa. Sin errores de consola observados.
+- El enlace público al aviso abre correctamente `privacidad.html`, tiene canonical propio y no desborda en móvil. Declara expresamente los datos legales pendientes. Es una versión inicial, no un aviso integral validado.
+- La página se dejó en su URL normal, sin datos de la prueba ni ajuste temporal de tamaño.
+
+Las pruebas reproducibles de lógica y la revisión local completa figuran en [VERIFICACION.md](VERIFICACION.md). El ajuste real de movimiento del sistema operativo no se cambió: se verificó su lógica con simulación; la pausa manual sí se probó en navegador. Fotografías finales, teléfono de WhatsApp, correo y domicilio para privacidad siguen pendientes del cliente.
+
+## Publicación anterior V3 (registro histórico)
+
 - Sitio público: https://ozzy-barbosa.github.io/alexa-lara/
 - Repositorio: https://github.com/Ozzy-Barbosa/alexa-lara
 - Fuente: rama `main`, carpeta raíz `/`, HTTPS obligatorio, sin dominio propio configurado.

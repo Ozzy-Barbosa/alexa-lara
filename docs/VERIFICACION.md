@@ -1,10 +1,10 @@
 # Verificación del rediseño
 
-Revisión del 1 de octubre de 2026, sobre el sitio servido localmente.
+Revisión del 1 de octubre de 2026, sobre el sitio local y la publicación en GitHub Pages.
 
-## Iteración V4 — interacciones y claridad, revisión local
+## Iteración V4 — interacciones y claridad
 
-**Estado: todavía no publicada.** Las comprobaciones siguientes corresponden a la implementación local. La publicación previa de V3 en GitHub Pages no acredita la presencia de V4 en la URL pública.
+**Estado: publicada y comprobada.** El código `81f97ab4214ea90b1322dac9ec245c336d212a60` se desplegó correctamente. Las pruebas detalladas a continuación se realizaron en local y la comprobación independiente de la URL pública consta en `PUBLICACION.md`.
 
 ### Comprobado en navegador
 
@@ -34,9 +34,9 @@ Estas pruebas verifican lógica y estados. **No equivalen a ejecutar un navegado
 - El formulario permanece oculto hasta instalar sus manejadores. Una carga fallida de JavaScript no expone un formulario nativo que envíe los datos por GET. Sin JavaScript, la cinta tampoco queda animándose sin control de pausa; revisión de código, no una sesión de navegador con JavaScript deshabilitado.
 - Capturas: `previews/v4-biografia-desktop.png`, `previews/v4-preguntas-desktop.png`, `previews/v4-formulario-desktop.png`, `previews/v4-formulario-movil.png`.
 
-### Pendiente de publicación
+### Comprobación pública
 
-La comprobación pública de esta iteración se registrará por separado en `PUBLICACION.md` después del despliegue.
+V4 se inspeccionó en la URL pública a 1440 y 390 px: foto correcta, estilos animados nuevos, FAQ, menú móvil, formulario de dos pasos hasta mensaje preparado, aviso accesible, sin desbordamiento horizontal ni errores de consola observados. Nueve archivos de texto y las dos variantes de la foto nueva respondieron HTTP 200 y coincidieron con la copia local. Véase `PUBLICACION.md`.
 
 ### Datos y límites de esta iteración
 
@@ -83,7 +83,7 @@ Acceso comprobado al perfil de Instagram y a las imágenes renderizadas de su cu
 
 ## Límites
 
-El WhatsApp real y el dominio propio siguen pendientes. No se probó un envío real por WhatsApp ni se activó un backend. La versión anterior se publicó en GitHub Pages; véase el [registro de publicación](PUBLICACION.md). Eso no confirma la publicación de V4, cuyo estado local figura al comienzo de este documento. La activación automática del ajuste de movimiento del sistema se revisó en código y en un entorno simulado; los controles manuales sí se probaron en navegador.
+El WhatsApp real y el dominio propio siguen pendientes. No se probó un envío real por WhatsApp ni se activó un backend. La publicación de V4 está documentada en el [registro de publicación](PUBLICACION.md). La activación automática del ajuste de movimiento del sistema se revisó en código y en un entorno simulado; los controles manuales sí se probaron en navegador.
 
 Las comprobaciones visuales se realizaron con el navegador integrado. La herramienta de navegador independiente no pudo iniciar su motor instalado, por lo que se utilizó el navegador disponible sin alterar sus protecciones.
 

@@ -10,7 +10,7 @@ Dirección configurada para GitHub Pages: [Alexa Lara Fotografía](https://ozzy-
 
 ## Esta versión
 
-La iteración **V4 está en revisión local y todavía no se ha publicado**. La URL de GitHub Pages y las capturas V3 anteriores no prueban que estos últimos cambios estén disponibles en línea. El estado de cada revisión se registra en `docs/VERIFICACION.md`.
+La iteración **V4 está publicada y comprobada en GitHub Pages**: retrato personal corregido, FAQ, aviso inicial, formulario de dos pasos y movimiento accesible. La verificación pública del código `81f97ab` está registrada en `docs/PUBLICACION.md`; las pruebas locales y sus límites, en `docs/VERIFICACION.md`.
 
 - Dirección editorial cinematográfica: carbón con matiz oliva, marfil y acentos dorados mates, gran tipografía serif y portada de fotografías superpuestas como impresiones.
 - Galería enmarcada, presentación de Alexa en collage, sesiones con acabados de impresión y formulario con campos delimitados.
