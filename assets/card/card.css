@@ -22,10 +22,10 @@ a:hover{text-decoration:underline;text-underline-offset:5px}
 .profile-photo img{width:100%;aspect-ratio:1;object-fit:contain}
 .profile-photo p{margin:0;color:var(--paper);font-size:10px;letter-spacing:.18em;text-align:center;line-height:1.8}
 .profile-photo p span{white-space:nowrap}
-.card-details{padding:43px 42px 33px}
+.card-details{padding:43px 42px 33px;min-width:0}
 .eyebrow{font-size:9px;font-weight:500;letter-spacing:.18em;line-height:1.8;margin:0 0 13px;color:var(--muted)}
 h1,h2,.card-intro{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;letter-spacing:-.035em}
-h1{font-size:clamp(56px,6vw,77px);line-height:1;margin:0 0 17px;white-space:nowrap}
+h1{font-size:clamp(56px,6vw,77px);line-height:1;margin:0 0 17px}
 .card-intro{font-size:35px;line-height:1.05;margin:0 0 16px}
 em{font-style:normal;color:var(--wine)}
 .disciplines{font-size:12px;line-height:1.7;color:var(--muted);margin:0 0 27px}

@@ -1,12 +1,14 @@
 # Prompt V6 — fotografía, carácter y cercanía
 
-Actúa como director de arte y desarrollador del sitio de **Alexa Lara Fotografía**. Continúa esta versión con una identidad formal, cálida y fotográfica: superficies vino y marfil, serif Cormorant Garamond para titulares y DM Sans para lectura, navegación y formularios. Esta dirección sustituye la estética V5; conserva las funciones de consulta, accesibilidad y trazabilidad ya implementadas.
+Actúa como director de arte y desarrollador del sitio de **Alexa Lara Fotografía**. Continúa esta versión con una identidad formal, cálida y fotográfica: negro y marfil con acentos vino, serif Cormorant Garamond para titulares y DM Sans para lectura, navegación y formularios. Conserva el tratamiento fotográfico integrado en negro de la portada V5, con la tipografía y los acentos definidos para V6, además de las funciones de consulta, accesibilidad y trazabilidad ya implementadas.
 
 ## Composición
 
-Crea una portada con **una sola fotografía protagonista**, tomada del material real entregado por la clienta. Combina el titular y las acciones sobre una superficie vino con una imagen generosa y bien encuadrada. Conserva espacio alrededor de rostros, manos y puntos de interés. En móvil, reordena las áreas con una lectura clara; no superpongas texto sobre la cara ni recuperes carruseles, polaroids inclinadas, órbitas o adornos que compitan con la obra.
+Crea una portada con **una sola fotografía protagonista integrada en un fondo negro con desvanecido**, siguiendo la aclaración expresa del usuario al cierre. Usa la composición de la referencia V5 en su archivo entregado por la clienta, `assets/portfolio/client-0e241686bc2190ec-1600.webp`. El negro debe fundirse de forma controlada con la imagen y permitir leer titular y acciones sin cubrir el rostro. No dividas el inicio en una gran mitad vino y otra fotográfica: el vino sustituye los acentos verdes discretos, no el fondo negro de la portada. Conserva espacio alrededor de manos y puntos de interés. En móvil, adapta el encuadre y la posición del texto; no recuperes carruseles, polaroids inclinadas, órbitas o adornos que compitan con la obra.
 
-Usa marfil `#f5f0e8`, vino profundo, acentos burdeos y divisores finos. La página y la tarjeta digital deben pertenecer a la misma identidad aunque adapten la composición al formato. Da protagonismo a la fotografía mediante escala, proporción y ritmo, con una galería oscura y sesiones que muestren imágenes pertinentes.
+Usa negro, marfil `#f5f0e8`, acentos vino o burdeos y divisores finos. Mantén Cormorant Garamond por la preferencia tipográfica del usuario. La página y la tarjeta digital deben pertenecer a la misma identidad aunque adapten la proporción de color y la composición al formato. Da protagonismo a la fotografía mediante escala, proporción y ritmo, con una galería oscura y sesiones que muestren imágenes pertinentes.
+
+Este ajuste de portada se registró después de la publicación de V6. Su revisión visual y comprobación pública deben documentarse por separado; la publicación anterior no demuestra que el ajuste ya esté disponible.
 
 ## Fotografías y verdad
 

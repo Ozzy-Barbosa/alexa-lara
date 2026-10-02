@@ -4,9 +4,9 @@ Revisión del 1 de octubre de 2026, sobre el sitio local y la publicación en Gi
 
 ## Iteración V6 — vino, portada única y contacto real
 
-**Estado local: implementada y comprobada.** La publicación se registra por separado en `PUBLICACION.md`. Los apartados V5 y anteriores son históricos, incluidos sus contactos pendientes.
+**Estado: implementada, publicada y comprobada.** La publicación se registra por separado en `PUBLICACION.md`. Los apartados V5 y anteriores son históricos, incluidos sus contactos pendientes.
 
-- Portada de una sola fotografía entregada, sin collage ni selector de tres escenas. Titulares Cormorant Garamond, cuerpo DM Sans y paleta vino/marfil. Galería oscura conservada.
+- Portada de una sola fotografía entregada, sin collage ni selector de tres escenas. Titulares Cormorant Garamond y cuerpo DM Sans. Tras la aclaración del usuario, se conserva el desvanecido negro de la referencia y el vino se aplica como acento en texto, líneas y botón, sin dividir la portada en un bloque vino. Galería oscura conservada.
 - 32 composiciones publicadas: 11 entregadas por la clienta y 21 provisionales de Instagram. Cuatro imágenes de Producto, filtro y servicio específico para empresas. Originales intactos; 28 variantes WebP locales sin EXIF/XMP, 2,194,946 bytes en conjunto. Importación incremental y curación documentadas en `ASSETS-CLIENTE.md`.
 - `npm run check`: sintaxis, recursos, anclas, contactos, metadatos, dimensiones JPEG y **13 pruebas de contrato aprobadas**. Las pruebas de Node comprueban lógica, no equivalen a un navegador real.
 - Navegador local: revisión visual a 1440, 768, 390 y 360 px. Sin desbordamiento horizontal observado en inicio, galería, servicios, tarjeta y privacidad. Una imagen principal, encuadre y tipografía verificados; capturas `previews/v6-portada-escritorio.png`, `previews/v6-portada-movil.png` y `previews/v6-tarjeta-escritorio.png`.
@@ -19,6 +19,7 @@ Revisión del 1 de octubre de 2026, sobre el sitio local y la publicación en Gi
 - Imagen social real 1200 × 630, con Alexa y su cámara, nombre y colores de marca; inspección visual del JPG y del PNG de tarjeta. El archivo nuevo no garantiza que WhatsApp reemplace previews ya almacenados en caché.
 - Configuración de dominio probada por separado en copia aislada: cambio de host/subcarpeta, canonical, Open Graph/Twitter, sitemap, QR, PNG y VCF consistentes; QR y tarjeta decodificados con el destino nuevo. Un Python ausente produce error y deja el HTML sin cambiar. La raíz real se configuró para la URL actual de Pages sin regenerar assets vigentes.
 - Sin errores o avisos de consola observados. El aviso de privacidad incorpora el correo confirmado y describe WhatsApp activo; siguen pendientes domicilio y procedimiento formal. No se presenta como aviso integral terminado ni se certifica cumplimiento legal.
+- Revisión pública inicial V6: portada y Cormorant a 1440 px; móvil a 390 px con menú, FAQ por teclado, consulta de Producto y tarjeta. Se eliminó la obligación de mantener el nombre de la tarjeta en una sola línea para permitir ajuste mientras carga la fuente. Con las fuentes cargadas, la tarjeta no desborda. Los 84 archivos de la comprobación remota inicial responden 200 y coinciden con local. El ajuste posterior de desvanecido negro requiere su propia comprobación pública al desplegarse.
 
 ## Iteración V5 — identidad fotográfica propia
 

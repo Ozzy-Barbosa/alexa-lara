@@ -10,9 +10,11 @@ Dirección configurada para GitHub Pages: [Alexa Lara Fotografía](https://ozzy-
 
 ## Esta versión
 
-La iteración **V6 está preparada en local; su publicación y comprobación pública están pendientes**. Incorpora fotografías entregadas por la clienta, una identidad más formal, contacto confirmado y tarjeta digital. Los despliegues anteriores están registrados en `docs/PUBLICACION.md`; las pruebas y sus límites, en `docs/VERIFICACION.md`. La URL pública puede mostrar una versión anterior mientras no se confirme esta actualización.
+La iteración **V6 está publicada y comprobada en GitHub Pages**. Incorpora fotografías entregadas por la clienta, una identidad más formal, contacto confirmado y tarjeta digital. El despliegue, la comparación de 84 archivos públicos y la revisión de escritorio y móvil están registrados en `docs/PUBLICACION.md`; las pruebas y sus límites, en `docs/VERIFICACION.md`.
 
-- Identidad formal en vino, burdeos y marfil: titulares Cormorant Garamond y lectura en DM Sans, con portada de una sola fotografía protagonista.
+**Ajuste solicitado al cierre:** conservar el inicio fotográfico integrado en negro con desvanecido, siguiendo la referencia V5, y reservar el vino para acentos discretos. La comprobación de este ajuste de portada está pendiente; no cambia el registro de publicación de V6 anterior.
+
+- Identidad formal en negro y marfil con acentos vino: titulares Cormorant Garamond y lectura en DM Sans. La portada integra una sola fotografía protagonista en un fondo negro con desvanecido, sin dividir el inicio en una mitad vino y otra fotográfica.
 - Galería oscura, presentación de Alexa con retratos confirmados y sesiones con imágenes pertinentes. Composición adaptable a móvil.
 - **32 composiciones únicas: 11 fotografías entregadas por la clienta y 21 provisionales de Instagram**, sin fotos de banco ni duplicados publicados de la misma composición.
 - Galería con Retratos, Editorial, Familia, Exteriores y **Producto, con cuatro imágenes**; muestra 12 fotografías y permite cargar el resto.

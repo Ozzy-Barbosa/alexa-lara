@@ -4,9 +4,9 @@
   --paper-deep:#ebe1db;
   --ink:#2b2024;
   --muted:#75646a;
-  --dark:#21171d;
+  --dark:#111314;
   --accent:#762f49;
-  --rose:#e2b5c4;
+  --rose:#d7a9b9;
   --line:#d9c8ce;
   --serif:"Cormorant Garamond",Georgia,serif;
   --sans:"DM Sans",Arial,sans-serif;
@@ -198,7 +198,7 @@ button:disabled {
 }
 
 .site-header.scrolled {
-  background:#21171df5;
+  background:#111314f5;
   backdrop-filter:blur(16px)
 }
 
@@ -287,21 +287,22 @@ button:disabled {
 }
 
 .hero-cover {
-  display:grid;
-  grid-template-columns:44% 56%;
-  min-height:650px
+  position:relative;
+  isolation:isolate;
+  min-height:750px
 }
 
 .cover-copy {
-  padding:64px 40px 40px max(56px,calc((100vw - 1380px)/2));
-  background:linear-gradient(145deg,#66263e,#452030 85%);
+  position:relative;
+  min-height:inherit;
+  padding:54px max(56px,calc((100vw - 1380px)/2)) 50px;
   display:flex;
   flex-direction:column;
   align-items:start
 }
 
 .cover-kicker {
-  color:#ebcfd9;
+  color:#d8d4d5;
   font-size:9px;
   letter-spacing:.14em
 }
@@ -310,19 +311,19 @@ button:disabled {
   width:62px;
   height:1px;
   background:var(--rose);
-  margin-block:32px
+  margin-block:55px 38px
 }
 
 .cover-copy h1 {
-  font-size:clamp(68px,6.6vw,103px);
-  line-height:.96;
+  font-size:clamp(90px,9.5vw,146px);
+  line-height:.88;
   letter-spacing:-.035em;
   font-weight:400;
   animation:title-enter 800ms cubic-bezier(.16,1,.3,1) both
 }
 
 .cover-copy h1 em {
-  color:#edc5d3
+  color:var(--rose)
 }
 
 .cover-description {
@@ -334,40 +335,49 @@ button:disabled {
 
 .cover-actions {
   display:flex;
-  align-items:start;
-  flex-direction:column;
-  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:28px;
   margin-top:30px
 }
 
 .cover-actions .button-cream {
-  background:var(--paper);
-  border-color:var(--paper)
+  background:var(--accent);
+  color:var(--paper);
+  border-color:var(--accent)
 }
 
 .cover-actions .button-cream:hover {
-  background:var(--rose);
-  border-color:var(--rose)
+  background:#8b3d58;
+  border-color:#8b3d58
 }
 
 .cover-actions .text-link {
-  border:0;
+  border-color:#ffffff60;
   font-size:11px
 }
 
 .cover-signature {
   margin-top:auto;
-  padding-top:38px;
+  padding-top:32px;
   font:italic 20px var(--serif);
   color:#dfbac8
 }
 
 .cover-photograph {
-  position:relative;
+  position:absolute;
+  inset:0 0 0 38%;
+  z-index:-1;
   overflow:hidden;
-  display:grid;
-  grid-template-rows:minmax(0,1fr) auto;
-  background:#45392f
+  background:var(--dark)
+}
+
+.cover-photograph::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,#111314 0%,#11131470 20%,transparent 50%),linear-gradient(0deg,#111314e8 0%,transparent 30%,transparent 90%,#11131430);
+  pointer-events:none
 }
 
 .cover-photograph img {
@@ -375,24 +385,27 @@ button:disabled {
   height:100%;
   min-height:0;
   object-fit:cover;
-  object-position:73% center;
+  object-position:50% 30%;
   animation:scene-enter 1200ms cubic-bezier(.2,.7,.2,1) both
 }
 
 .cover-photograph figcaption {
+  position:absolute;
+  z-index:1;
+  bottom:40px;
+  right:56px;
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  padding:20px 32px;
-  background:var(--paper);
-  color:var(--ink);
+  flex-direction:column;
+  align-items:end;
+  gap:8px;
+  color:var(--paper);
+  text-shadow:0 1px 12px #0009;
   font:italic 18px var(--serif)
 }
 
 .cover-photograph figcaption span:first-child {
   font:9px var(--mono);
-  color:var(--muted);
+  color:#dfd7db;
   letter-spacing:.06em
 }
 
@@ -403,6 +416,8 @@ button:disabled {
   padding-block:8px;
   gap:24px
 }
+
+.cover-bottom {border-top:1px solid #ffffff26}
 
 .cover-bottom>p {
   font:9px var(--mono);
@@ -613,8 +628,8 @@ button:disabled {
 
 @media(max-width:1100px) {
   .cover-copy {padding-left:32px;padding-right:28px}
-  .cover-copy h1 {font-size:7.2vw}
-  .cover-photograph figcaption {padding-inline:22px;flex-wrap:wrap;gap:6px}
+  .cover-copy h1 {font-size:11vw}
+  .cover-photograph figcaption {right:32px;font-size:16px}
   .digital-contact-layout {gap:5%}
   .digital-card {padding:25px}
   .digital-card-body {gap:18px}
@@ -623,30 +638,32 @@ button:disabled {
 }
 
 @media(max-width:900px) {
-  .hero-cover {grid-template-columns:1fr;min-height:0}
-  .cover-copy {padding:42px 32px 38px;position:relative}
-  .cover-copy h1 {font-size:clamp(64px,10vw,85px)}
-  .cover-rule {margin-block:22px}
+  .hero-cover {min-height:690px}
+  .cover-copy {padding:40px 32px 38px}
+  .cover-copy h1 {font-size:12vw}
+  .cover-rule {margin-block:70px 35px}
   .cover-description {margin-top:20px}
   .cover-actions {flex-direction:row;align-items:center;margin-top:24px;gap:25px}
-  .cover-signature {position:absolute;right:32px;bottom:42px;writing-mode:vertical-rl;padding:0}
-  .cover-photograph img {aspect-ratio:1.75;height:auto;object-position:center}
+  .cover-signature {padding-top:32px}
   .digital-contact-layout {grid-template-columns:1fr;gap:40px}
   .digital-card {max-width:550px;width:100%}
 }
 
 @media(max-width:650px) {
-  .cover-copy {padding:32px 20px 30px}
+  .hero-cover {min-height:720px}
+  .cover-copy {padding:305px 20px 30px;justify-content:end}
   .cover-kicker {font-size:8px}
-  .cover-copy h1 {font-size:clamp(57px,13.9vw,80px)}
-  .cover-rule {margin-block:20px}
+  .cover-copy h1 {font-size:clamp(64px,16.8vw,105px);line-height:.94}
+  .cover-rule {width:38px;margin-block:20px}
   .cover-description {font-size:12px;margin-top:20px}
   .cover-actions {gap:18px;margin-top:22px;flex-wrap:wrap}
   .cover-actions .button {font-size:11px;padding:12px 17px;gap:24px;min-height:48px}
   .cover-actions .text-link {font-size:10px;min-height:44px}
   .cover-signature {display:none}
-  .cover-photograph img {aspect-ratio:1.28;object-position:72% center}
-  .cover-photograph figcaption {padding:17px 20px;font-size:16px}
+  .cover-photograph {inset:0}
+  .cover-photograph img {object-position:62% 15%}
+  .cover-photograph::after {background:linear-gradient(0deg,#111314 3%,#111314e8 34%,#11131420 75%),linear-gradient(90deg,#11131435,transparent)}
+  .cover-photograph figcaption {top:20px;bottom:auto;right:20px;font-size:13px;padding:9px 12px;background:#111314b0;text-shadow:none}
   .cover-photograph figcaption span:first-child {font-size:8px}
   .cover-bottom {padding-block:7px}
   .cover-bottom>p {display:none}

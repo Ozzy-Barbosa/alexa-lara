@@ -2,6 +2,21 @@
 
 Fecha: 1 de octubre de 2026.
 
+## Actualización V6 — identidad vino, producto y tarjeta digital
+
+- Código principal: `880b9abcd020b2951ebbfb065955d154c3cf0fc7`; formato exacto de QR/VCF publicado en `ab9cc4c712832a5897241146093cce121e5f033f`.
+- [Despliegue de V6 y descargas verificadas](https://github.com/Ozzy-Barbosa/alexa-lara/actions/runs/36963198594): build y deploy `success`, 2 de octubre de 2026 04:08 UTC / 1 de octubre local.
+- [Sitio público](https://ozzy-barbosa.github.io/alexa-lara/) y [tarjeta digital](https://ozzy-barbosa.github.io/alexa-lara/tarjeta.html).
+- **84 recursos públicos HTTP 200 y coincidentes**: doce archivos de texto normalizando solo CRLF/LF, 64 variantes de las 32 fotografías, cinco descargas/recursos de tarjeta y tres fuentes locales. Imágenes, fuentes, QR y VCF comparados byte a byte. Evidencia local `.verification/v6-live-result.json`.
+- La vCard conserva CRLF y el QR SVG conserva sus bytes generados mediante `.gitattributes`; sus hashes públicos coinciden con el manifiesto. El destino de QR PNG y tarjeta completa se decodificó independientemente antes de publicar y los archivos públicos son idénticos.
+- Navegador público a 1440 px de la primera publicación V6: portada única con nueva fotografía, titulares Cormorant y galería 12/32. Sin desbordamiento. Tras esta revisión, el usuario aclaró que debía conservarse el desvanecido negro, usando vino solo en los acentos del inicio; ese ajuste queda incluido en el cierre siguiente.
+- Navegador público a 390 px: menú abre/cierra, FAQ de precios se abre con Enter y queda como única respuesta abierta. Consulta desde Producto selecciona el servicio y prepara la vista previa con el WhatsApp confirmado. Solo datos ficticios; no se abrió el enlace con la consulta ni se envió mensaje, correo o llamada.
+- Tarjeta pública: foto de Alexa con cámara, teléfono, correo y QR disponibles; con las fuentes cargadas no hay desbordamiento lateral. La comprobación detectó un ajuste transitorio mientras cargaba la tipografía: el cierre de esta revisión permite envolver el nombre sin forzarlo a una sola línea. Sin errores de consola observados.
+- Nueva imagen social JPEG 1200 × 630 servida correctamente y enlazada desde inicio y tarjeta. No se afirma que WhatsApp haya actualizado previews de mensajes antiguos; pueden conservar caché.
+- El sitio queda en su URL normal, sin datos ficticios. Las comprobaciones locales, sus límites y las descargas se detallan en `VERIFICACION.md`.
+
+Teléfono y correo ya están confirmados. El aviso de privacidad sigue siendo inicial: faltan domicilio y procedimiento formal. Los apartados V5 y anteriores documentan el estado histórico; sus pendientes de teléfono/correo ya no representan V6.
+
 ## Actualización V5 — identidad fotográfica propia
 
 - Código verificado: `44fde4db0eb784703863e943a253dcdbce69a3ee`.
