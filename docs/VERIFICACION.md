@@ -2,6 +2,24 @@
 
 Revisión del 1 de octubre de 2026, sobre el sitio local y la publicación en GitHub Pages.
 
+## Iteración V6 — vino, portada única y contacto real
+
+**Estado local: implementada y comprobada.** La publicación se registra por separado en `PUBLICACION.md`. Los apartados V5 y anteriores son históricos, incluidos sus contactos pendientes.
+
+- Portada de una sola fotografía entregada, sin collage ni selector de tres escenas. Titulares Cormorant Garamond, cuerpo DM Sans y paleta vino/marfil. Galería oscura conservada.
+- 32 composiciones publicadas: 11 entregadas por la clienta y 21 provisionales de Instagram. Cuatro imágenes de Producto, filtro y servicio específico para empresas. Originales intactos; 28 variantes WebP locales sin EXIF/XMP, 2,194,946 bytes en conjunto. Importación incremental y curación documentadas en `ASSETS-CLIENTE.md`.
+- `npm run check`: sintaxis, recursos, anclas, contactos, metadatos, dimensiones JPEG y **13 pruebas de contrato aprobadas**. Las pruebas de Node comprueban lógica, no equivalen a un navegador real.
+- Navegador local: revisión visual a 1440, 768, 390 y 360 px. Sin desbordamiento horizontal observado en inicio, galería, servicios, tarjeta y privacidad. Una imagen principal, encuadre y tipografía verificados; capturas `previews/v6-portada-escritorio.png`, `previews/v6-portada-movil.png` y `previews/v6-tarjeta-escritorio.png`.
+- Galería real: 12 → 21 → 30 → 32 y botón oculto al terminar. Producto muestra 4/4; su visor no inventa un enlace a Instagram. Escape cierra. Las imágenes se abren completas.
+- FAQ real: cierre de 300 ms seguido de apertura de 300 ms, una sola respuesta abierta también durante el cambio. Segunda pregunta, cambios rápidos hacia quinta/cuarta y Enter probados. Al terminar se limpian las alturas. Pausa manual sincroniza ambos controles, muestra los contenidos y resuelve la FAQ inmediatamente.
+- La preferencia reducida del sistema y ausencia de WAAPI se probaron con simulación; no se modificó el ajuste del sistema operativo. La alternativa sin JavaScript fue revisada en código, no en una sesión con JavaScript desactivado.
+- Menú móvil abre y cierra al navegar. La consulta desde Producto selecciona el servicio correcto. Formulario recorrido con datos ficticios: ciudad, idea, nombre, consentimiento y vista previa. El enlace preparado conserva acentos y apunta a `5216121044559`. **No se abrió ese enlace con la consulta ni se envió mensaje, correo o llamada.**
+- Teléfono visible, `tel:` y vCard: `+526121044559`; correo `alexalarar17@gmail.com`. El prefijo adicional para WhatsApp México sigue la [documentación oficial de WhatsApp](https://faq.whatsapp.com/640432094208718/?locale=ca_ES); no se añade al número telefónico normal.
+- Tarjeta HTML comprobada a 390 y 360 px. PNG y VCF descargados a través de sus enlaces; hashes coincidentes con los archivos locales. QR PNG y tarjeta completa decodificados independientemente con ZXing-C++; evidencia en `assets/card/manifest.json`. No se ha probado aún con una cámara física.
+- Imagen social real 1200 × 630, con Alexa y su cámara, nombre y colores de marca; inspección visual del JPG y del PNG de tarjeta. El archivo nuevo no garantiza que WhatsApp reemplace previews ya almacenados en caché.
+- Configuración de dominio probada por separado en copia aislada: cambio de host/subcarpeta, canonical, Open Graph/Twitter, sitemap, QR, PNG y VCF consistentes; QR y tarjeta decodificados con el destino nuevo. Un Python ausente produce error y deja el HTML sin cambiar. La raíz real se configuró para la URL actual de Pages sin regenerar assets vigentes.
+- Sin errores o avisos de consola observados. El aviso de privacidad incorpora el correo confirmado y describe WhatsApp activo; siguen pendientes domicilio y procedimiento formal. No se presenta como aviso integral terminado ni se certifica cumplimiento legal.
+
 ## Iteración V5 — identidad fotográfica propia
 
 **Estado: publicada y comprobada.** El código `44fde4db0eb784703863e943a253dcdbce69a3ee` se desplegó correctamente. La comprobación pública independiente está registrada en `PUBLICACION.md`.

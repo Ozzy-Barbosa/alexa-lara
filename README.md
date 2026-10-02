@@ -6,23 +6,23 @@ Repositorio: [Ozzy-Barbosa/alexa-lara](https://github.com/Ozzy-Barbosa/alexa-lar
 
 Dirección configurada para GitHub Pages: [Alexa Lara Fotografía](https://ozzy-barbosa.github.io/alexa-lara/).
 
-![Portada V5 del sitio](docs/previews/v5-portada-desktop.png)
+![Portada V6 del sitio](docs/previews/v6-portada-escritorio.png)
 
 ## Esta versión
 
-La iteración **V5 está publicada y comprobada en GitHub Pages**. Renueva la identidad visual y conserva las funciones de consulta de V4. El despliegue del código `44fde4d`, la comparación de los archivos públicos y la revisión visual de escritorio y móvil están registrados en `docs/PUBLICACION.md`; las pruebas locales y sus límites, en `docs/VERIFICACION.md`.
+La iteración **V6 está preparada en local; su publicación y comprobación pública están pendientes**. Incorpora fotografías entregadas por la clienta, una identidad más formal, contacto confirmado y tarjeta digital. Los despliegues anteriores están registrados en `docs/PUBLICACION.md`; las pruebas y sus límites, en `docs/VERIFICACION.md`. La URL pública puede mostrar una versión anterior mientras no se confirme esta actualización.
 
-- Identidad de estudio fotográfico contemporáneo: negro carbón, blanco frío, grises plata y salvia clara; titulares grandes y compactos en DM Sans.
-- Portada fotográfica inmersiva con tres escenas manuales: Exteriores, Editorial y Retratos. Selector con teclado y estado activo, sin reproducción automática.
-- Galería oscura sin marcos decorativos, presentación de Alexa en díptico ortogonal y sesiones como tríptico fotográfico. Composición adaptable a móvil.
-- **22 fotografías distintas** obtenidas del perfil [@aleroblesfotografia](https://www.instagram.com/aleroblesfotografia/) y sus colaboraciones visibles. Sin fotos de banco.
-- Galería con Retratos, Editorial, Familia y Exteriores; muestra 12 imágenes y permite cargar el resto.
-- Visor con anterior/siguiente, teclado, Escape, gestos táctiles y enlace a cada publicación original.
+- Identidad formal en vino, burdeos y marfil: titulares Cormorant Garamond y lectura en DM Sans, con portada de una sola fotografía protagonista.
+- Galería oscura, presentación de Alexa con retratos confirmados y sesiones con imágenes pertinentes. Composición adaptable a móvil.
+- **32 composiciones únicas: 11 fotografías entregadas por la clienta y 21 provisionales de Instagram**, sin fotos de banco ni duplicados publicados de la misma composición.
+- Galería con Retratos, Editorial, Familia, Exteriores y **Producto, con cuatro imágenes**; muestra 12 fotografías y permite cargar el resto.
+- Visor con anterior/siguiente, teclado, Escape y gestos táctiles. El enlace a la publicación original aparece solo cuando existe una fuente de Instagram; no se inventa para las fotografías entregadas.
 - Microanimaciones finitas y progreso de lectura. Se retiraron parallax, inclinaciones y cinta continua; los dos controles de pausa están sincronizados y respetan la preferencia de movimiento reducido del sistema.
-- Seis preguntas frecuentes desplegables, disponibles también sin JavaScript.
-- Formulario en dos pasos: sesión, lugar, fecha e idea; después, nombre y consentimiento. Incluye revisión, corrección del mensaje, copia y contacto por Instagram; listo para WhatsApp al configurar el número real.
+- Seis preguntas frecuentes en acordeón exclusivo, con transición de 300 ms y cambios inmediatos al reducir o pausar el movimiento. Conserva su alternativa sin JavaScript.
+- Formulario en dos pasos: sesión, lugar, fecha e idea; después, nombre y consentimiento. Incluye revisión, corrección del mensaje, copia y apertura de WhatsApp con el número confirmado; también permite contactar por Instagram.
 - Dos retratos confirmados de Alexa en el díptico: el profesional y el personal guardado en `assets/alexa/`. No aumentan el número de obras de la galería.
 - Aviso inicial de privacidad en `privacidad.html`, enlazado desde el formulario y el footer.
+- Tarjeta digital en `tarjeta.html`, QR estático verificado, tarjeta PNG descargable, contacto VCF y vista previa social de 1200 × 630 px.
 - Imágenes locales WebP, tamaños adaptativos, carga diferida y dimensiones reservadas.
 - **6 posiciones adicionales reservadas** para nuevas fotografías, ocultas hasta completarlas.
 
@@ -36,7 +36,7 @@ npm run dev
 npm run check
 ```
 
-No requiere `npm install`. El servidor de desarrollo escucha únicamente en el equipo local. `npm run check` incluye comprobaciones estáticas y diez pruebas de interacciones. Estas últimas usan un entorno simulado de Node.js: comprueban lógica y estados, pero no sustituyen las pruebas de navegador, teclado, renderizado o preferencia real de movimiento del sistema.
+No requiere `npm install`. El servidor de desarrollo escucha únicamente en el equipo local. `npm run check` incluye comprobaciones estáticas y **13 pruebas de interacciones**, superadas en esta iteración. Estas últimas usan un entorno simulado de Node.js: comprueban lógica y estados, pero no sustituyen las pruebas de navegador, teclado, renderizado o preferencia real de movimiento del sistema.
 
 ## Continuar con el cliente
 
@@ -47,49 +47,66 @@ No requiere `npm install`. El servidor de desarrollo escucha únicamente en el e
 | `styles.css` | Colores, tipografía, composición, responsive y movimiento |
 | `script.js` | Galería, visor, menú y preparación de consultas |
 | `privacidad.html` | Aviso inicial, funcionamiento del formulario y datos del responsable pendientes |
+| `tarjeta.html`, `assets/card/` | Tarjeta digital, contacto descargable, QR y vista previa social |
 | `docs/PROMPT-DISENO-ALEXA.md` | Prompt reutilizable aplicado a este rediseño |
-| `docs/PROMPT-ESTILO-EDITORIAL-V3.md` | Dirección visual histórica de V3, sustituida por V5 |
+| `docs/PROMPT-ESTILO-EDITORIAL-V3.md` | Dirección visual histórica de V3 |
 | `docs/PROMPT-INTERACCIONES-V4.md` | Formulario de dos pasos, FAQ, privacidad, identidad y comprobaciones |
-| `docs/PROMPT-IDENTIDAD-FOTOGRAFICA-V5.md` | Dirección visual actual y criterios para mantener una identidad propia |
+| `docs/PROMPT-IDENTIDAD-FOTOGRAFICA-V5.md` | Dirección visual histórica de V5 |
+| `docs/PROMPT-IDENTIDAD-V6.md` | Dirección visual actual, fotografía real y criterios de continuidad |
 | `docs/ASSETS-INSTAGRAM.md` | Procedencia de cada foto y preparación de versiones web |
+| `docs/ASSETS-CLIENTE.md` | Selección entregada, importador incremental y control de duplicados |
+| `docs/TARJETA-DIGITAL.md` | Generación de tarjeta, QR, contacto, vista previa y pruebas de lectura |
 | `docs/VERIFICACION.md` | Comprobaciones y límites de esta entrega |
 
 ### Fotografías nuevas
 
-1. Guardar las exportaciones optimizadas en `assets/portfolio/`. No hace falta sobrescribir originales.
-2. Sustituir las rutas de una entrada de `photos` en `data.js`, o completar una entrada de `futureSlots` y moverla a `photos`.
-3. Completar `title`, `alt`, `category`, `src`, `full`, `width`, `height`, `srcWidth` y `fullWidth`; poner `published: true` para mostrarla. `position` controla el punto focal.
-4. Actualizar también las imágenes destacadas que se quieran cambiar en `index.html`.
-5. Ejecutar `npm run check` y comprobar encuadres en móvil y en el visor.
+1. Importar la carpeta recibida con `python scripts/import-client-images.py "ruta/a/originales"`. Requiere Pillow; conserva los originales y genera variantes WebP en `assets/portfolio/`.
+2. Revisar `assets/portfolio/contact-sheet.jpg`, el inventario y `curation.json`. El importador detecta duplicados exactos; las copias recomprimidas o recortadas se comparan visualmente.
+3. Incorporar la selección en `photos` de `data.js`, sustituyendo una entrada anterior cuando sea la misma composición. El importador **no publica automáticamente ni modifica el catálogo**.
+4. Completar `title`, `alt`, `category`, `src`, `full`, `width`, `height`, `srcWidth`, `fullWidth` y `published: true`. Para fotos entregadas: `provenance: "client"`, `provisional: false` y `source: ""`. `position` controla el punto focal.
+5. Actualizar las imágenes destacadas de `index.html` que corresponda, ejecutar `npm run check` y comprobar móvil y visor.
 
-Las categorías disponibles son `retratos`, `editorial`, `familia` y `exteriores`. Los títulos de la galería son rótulos curatoriales editables, no nombres oficiales de proyectos. La guía de medios contiene el script opcional con Pillow para generar WebP sin recortar.
+Las categorías disponibles son `retratos`, `editorial`, `familia`, `exteriores` y `producto`. Los títulos son rótulos curatoriales editables, no nombres oficiales de proyectos. El importador trabaja de forma incremental y conserva las imágenes anteriores; la guía `docs/ASSETS-CLIENTE.md` explica el flujo completo y la gestión de color y metadatos.
 
 ### Contacto
 
-Editar `whatsapp` en `data.js` con el código de país y el número oficial, solo dígitos, formato internacional de 10 a 15 dígitos. Con ese dato, después de preparar la consulta aparece el enlace “Continuar en WhatsApp”.
+Contactos confirmados por el usuario:
 
-Mientras esté vacío, el formulario prepara el mensaje para copiarlo y escribir al Instagram confirmado de Alexa. **No envía ni almacena solicitudes, no reserva fechas y no funciona como CRM.** El visitante elige cuándo enviarlo. No se inventó un teléfono.
+- Teléfono: **+52 612 104 4559**; enlace `tel:+526121044559` y el mismo número en VCF.
+- WhatsApp configurado: `https://wa.me/5216121044559`; `data.js` guarda `5216121044559`, específico para el enlace de WhatsApp.
+- Correo: **alexalarar17@gmail.com**.
+- Instagram profesional: **@aleroblesfotografia**.
+
+El formulario prepara el mensaje localmente. «Continuar en WhatsApp» abre la plataforma con ese texto para revisarlo; la persona decide enviarlo a Alexa. También puede copiarlo para Instagram. **El sitio no almacena solicitudes, no reserva fechas y no funciona como CRM.** No se enviaron mensajes reales para comprobar la implementación.
 
 El paso 1 recoge servicio, lugar, fecha opcional y mensaje opcional; el paso 2 pide nombre y consentimiento. «Editar mi idea» conserva los datos y retira la consulta preparada anterior para que se revise de nuevo. Instagram se abre sin adjuntar el mensaje: el visitante debe pegarlo y enviarlo.
 
+### Tarjeta digital
+
+`tarjeta.html` reúne enlaces directos y descargas. `assets/card/alexa-lara-tarjeta.png` es la tarjeta de 1080 × 1350 px; el QR PNG/SVG apunta a la URL pública de la tarjeta y `alexa-lara.vcf` permite guardar el contacto. El footer ofrece esos accesos.
+
+El QR y la tarjeta PNG se decodificaron con un lector independiente. La evidencia y los hashes están en `assets/card/manifest.json`. La vista previa `assets/card/alexa-lara-social.jpg` mide 1200 × 630 px y usa una fotografía real de Alexa con su cámara. Las plataformas externas pueden conservar una vista previa anterior en caché.
+
+Para regenerar los recursos: `python scripts/build-brand-assets.py`; requiere Pillow y ReportLab. `--verify` añade comprobación independiente con ZXing-C++ disponible. Consulta `docs/TARJETA-DIGITAL.md` antes de cambiar el dominio o los datos; las tarjetas ya descargadas conservan el contenido que tenían al generarse.
+
 ### Aviso de privacidad
 
-El usuario confirmó a Alexa Lara como fotógrafa independiente. `privacidad.html` es un **aviso inicial, no el aviso integral terminado**: siguen pendientes el correo de privacidad, el domicilio para notificaciones y el procedimiento formal de atención. Completar esos datos con Alexa antes de presentarlo como definitivo.
+El usuario confirmó a Alexa Lara como fotógrafa independiente y proporcionó el correo de contacto incluido en el aviso. `privacidad.html` es un **aviso inicial, no el aviso integral terminado**: siguen pendientes el domicilio para notificaciones y el procedimiento formal de atención. Completar esos datos con Alexa antes de presentarlo como definitivo.
 
-El aviso describe la preparación local, el portapapeles, el contacto externo, GitHub Pages y Google Fonts. No hay WhatsApp activo, CRM, analítica ni base de datos de solicitudes en esta versión. Si se incorpora cualquiera de esas funciones o cambia el alojamiento, revisar el aviso para que siga describiendo el funcionamiento real.
+El aviso describe la preparación local, el portapapeles, los enlaces de WhatsApp, correo y teléfono, el alojamiento y las tipografías externas de la página principal. La tarjeta utiliza fuentes locales. No hay CRM, analítica ni base de datos de solicitudes en esta versión. Si cambia el tratamiento de datos o el alojamiento, revisar el aviso para que siga describiendo el funcionamiento real.
 
 ## Subir a hosting
 
-1. Confirmar con Alexa la selección, textos, servicios, número y dominio.
+1. Confirmar con Alexa la selección y los textos finales, completar los datos de privacidad pendientes y definir el dominio.
 2. Configurar el dominio (admite también una subcarpeta):
 
 ```sh
 npm run configure -- https://tu-dominio.com
 ```
 
-El comando escribe canonical, URL e imagen Open Graph absolutas, sitemap, robots, enlaces de la página 404 y canonical del aviso de privacidad. Actualmente está configurada la dirección real de GitHub Pages; vuelve a ejecutar el comando cuando se confirme el dominio propio.
+El comando actualiza canonical, Open Graph y Twitter Card de inicio y tarjeta, privacidad, sitemap, robots, página 404 y enlace visible del QR. Si cambia la base pública o faltan recursos, regenera QR, tarjeta y VCF antes de guardar el HTML; esa operación requiere Python con Pillow y ReportLab. Usa `--python ruta/al/python` o la variable `PYTHON` si el ejecutable no se llama `python`; `--dry-run` permite revisar el plan sin modificar archivos. Actualmente está configurada la dirección real de GitHub Pages.
 
-3. Subir `index.html`, `privacidad.html`, `styles.css`, `script.js`, `data.js`, `404.html`, `robots.txt`, `sitemap.xml`, `site.webmanifest` y `assets/` a la carpeta pública. Incluir `assets/alexa/` junto con las fotografías del portafolio. `docs/`, `scripts/`, `package.json` y `.git/` no son necesarios en el hosting.
+3. Subir `index.html`, `tarjeta.html`, `privacidad.html`, `styles.css`, `script.js`, `data.js`, `404.html`, `robots.txt`, `sitemap.xml`, `site.webmanifest` y `assets/` a la carpeta pública. Incluir `assets/alexa/`, `assets/card/` y `assets/portfolio/` junto con las fotografías provisionales. `docs/`, `scripts/`, `package.json` y `.git/` no son necesarios en el hosting.
 4. Configurar HTTPS y la página 404 en el proveedor. Verificar el dominio en Search Console y enviar el sitemap.
 
 ### GitHub Pages
@@ -98,18 +115,16 @@ Fuente de publicación: rama `main`, carpeta raíz `/`. El archivo `.nojekyll` p
 
 La dirección de esta entrega es `https://ozzy-barbosa.github.io/alexa-lara/`. Canonical, Open Graph, sitemap y enlaces 404 están configurados para esa subcarpeta. El estado de publicación se comprueba en los despliegues del repositorio; guardar un commit por sí solo no confirma que ya esté disponible en línea.
 
-Cuando se contrate un dominio propio, volver a ejecutar `npm run configure -- https://tu-dominio.com`, revisar DNS/HTTPS y publicar esos cambios. El número de WhatsApp y la selección definitiva de fotografías siguen sujetos a confirmación de Alexa.
+Cuando se contrate un dominio propio, volver a ejecutar `npm run configure -- https://tu-dominio.com`, revisar los nuevos QR, DNS/HTTPS y publicar esos cambios. El teléfono y correo ya están confirmados; la selección definitiva de fotografías y los datos restantes del aviso se revisan con Alexa.
 
 ## Evidencia visual
 
-La portada V5 corresponde a la implementación local. Las capturas V3 se conservan como historial visual, no como representación del diseño actual. Las comprobaciones realizadas y las pendientes figuran en `docs/VERIFICACION.md`.
+Las capturas V6 corresponden a la implementación local. Las imágenes de iteraciones anteriores se conservan como historial visual, no como representación del diseño actual. Las comprobaciones realizadas y las pendientes figuran en `docs/VERIFICACION.md`.
 
-- [Portada de escritorio V5](docs/previews/v5-portada-desktop.png)
-- [Portada móvil V3](docs/previews/v3-portada-movil.png)
-- [Galería V3](docs/previews/v3-galeria-desktop.png)
-- [Contacto V3](docs/previews/v3-contacto-desktop.png)
+- [Portada de escritorio V6](docs/previews/v6-portada-escritorio.png)
+- [Portada móvil V6](docs/previews/v6-portada-movil.png)
 - [Perfil de Instagram verificado](docs/previews/instagram-perfil.png)
 
 El SEO incluye contenido local, metadatos y datos estructurados con información conocida. El posicionamiento también depende de contenido original, reputación y presencia local; no se garantiza una posición concreta.
 
-Las fotografías se incluyen como material provisional del proyecto de la clienta. No se concede una licencia de reutilización de su obra.
+Las fotografías pertenecen al proyecto de la clienta; las procedentes de Instagram siguen identificadas como provisionales y las entregadas tienen su propia trazabilidad. No se concede una licencia de reutilización de su obra.

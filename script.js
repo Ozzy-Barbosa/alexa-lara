@@ -8,7 +8,7 @@
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const desktop = window.matchMedia("(min-width: 901px)");
     const categoryLabels = {
-      retratos: "Retratos", editorial: "Editorial", familia: "Familia", exteriores: "Exteriores"
+      retratos: "Retratos", editorial: "Editorial", familia: "Familia", exteriores: "Exteriores", producto: "Producto"
     };
     const instagramFallback = "https://www.instagram.com/aleroblesfotografia/";
     const instagramURL = (value) => {
@@ -74,6 +74,7 @@
     const motionToggles = $$(".motion-toggle");
     let manuallyPaused = false;
     const motionIsOff = () => reducedMotion.matches || manuallyPaused;
+    let settleFaqMotion = () => {};
     let revealObserver;
     const reveal = (element) => {
       element.classList.add("is-visible");
@@ -113,6 +114,7 @@
       });
       if (paused) {
         $$(".reveal-ready").forEach(reveal);
+        settleFaqMotion();
       }
       requestScrollUpdate();
     };
@@ -141,46 +143,93 @@
     applyMotionPreference();
     observeReveals($$("[data-reveal]"));
 
-    // The cover changes only when its native buttons are activated. Without JS,
-    // the first photograph stays visible and the optional controls stay hidden.
-    const heroControls = $("[data-hero-controls]");
-    const heroSceneButtons = $$("[data-hero-scene]");
-    const heroScenePanels = $$("[data-hero-panel]");
-    const heroSceneNames = ["exteriores", "editorial", "retratos"];
-    const heroScenes = new Map(heroScenePanels.map(panel => [panel.dataset.heroPanel, panel]));
-    const completeHeroScenes = heroSceneNames.every(scene =>
-      heroScenes.has(scene) && heroSceneButtons.some(button => button.dataset.heroScene === scene)
-    );
-    if (heroControls && completeHeroScenes) {
-      heroControls.setAttribute("role", "group");
-      if (!heroControls.hasAttribute("aria-label") && !heroControls.hasAttribute("aria-labelledby")) {
-        heroControls.setAttribute("aria-label", "Elegir colección destacada");
+    // Native details remain the no-JS fallback. Enhancement owns exclusivity so
+    // the native name group cannot snap a sibling shut mid-animation.
+    const faqItems = $$('details[name="alexa-faq"]').map(details => ({
+      details, summary: $("summary", details), answer: $(".faq-answer", details),
+      expanded: details.open, animation: null
+    })).filter(item => item.summary && item.answer);
+    let requestedFaq = faqItems.find(item => item.details.open) || null;
+    const cancelFaqAnimation = (item) => {
+      if (!item.animation) return;
+      const animation = item.animation;
+      item.animation = null;
+      animation.onfinish = null;
+      animation.oncancel = null;
+      animation.cancel();
+    };
+    const settleFaq = (item, expanded) => {
+      cancelFaqAnimation(item);
+      item.expanded = expanded;
+      item.details.open = expanded;
+      item.answer.inert = false;
+      item.details.style.removeProperty("height");
+      item.details.style.removeProperty("overflow");
+      requestScrollUpdate();
+    };
+    const animateFaq = (item, expanded) => {
+      if (item.expanded === expanded && (item.animation || item.details.open === expanded)) return;
+      const startHeight = item.details.getBoundingClientRect().height;
+      cancelFaqAnimation(item);
+      item.expanded = expanded;
+      if (motionIsOff() || typeof item.details.animate !== "function") {
+        settleFaq(item, expanded);
+        return;
       }
-      const showHeroScene = (scene) => {
-        if (!heroSceneNames.includes(scene)) return;
-        heroScenePanels.forEach(panel => {
-          const active = panel.dataset.heroPanel === scene;
-          panel.hidden = !active;
-          panel.classList.toggle("is-active", active);
+      const { details, summary, answer } = item;
+      details.open = true;
+      details.style.removeProperty("height");
+      const style = window.getComputedStyle(details);
+      const boxEdges = ["borderTopWidth", "borderBottomWidth", "paddingTop", "paddingBottom"]
+        .reduce((sum, key) => sum + (parseFloat(style[key]) || 0), 0);
+      const endHeight = expanded ? details.getBoundingClientRect().height : summary.getBoundingClientRect().height + boxEdges;
+      if (Math.abs(endHeight - startHeight) < 1) {
+        settleFaq(item, expanded);
+        return;
+      }
+      details.style.height = `${startHeight}px`;
+      details.style.overflow = "hidden";
+      answer.inert = !expanded;
+      try {
+        const animation = details.animate([{ height: `${startHeight}px` }, { height: `${endHeight}px` }], {
+          duration: 300, easing: "cubic-bezier(.2,.7,.2,1)", fill: "both"
         });
-        heroSceneButtons.forEach(button => {
-          const active = button.dataset.heroScene === scene;
-          button.setAttribute("aria-pressed", String(active));
-          button.classList.toggle("is-active", active);
-        });
-        heroControls.dataset.activeScene = scene;
-      };
-      heroSceneButtons.forEach(button => {
-        const panel = heroScenes.get(button.dataset.heroScene);
-        if (!panel || !heroSceneNames.includes(button.dataset.heroScene)) return;
-        if (!panel.id) panel.id = `hero-panel-${button.dataset.heroScene}`;
-        button.type = "button";
-        button.setAttribute("aria-controls", panel.id);
-        button.addEventListener("click", () => showHeroScene(button.dataset.heroScene));
+        item.animation = animation;
+        const finish = () => {
+          if (item.animation !== animation) return;
+          settleFaq(item, item.expanded);
+          reconcileFaqs();
+        };
+        animation.onfinish = finish;
+        animation.oncancel = finish;
+      } catch {
+        settleFaq(item, expanded);
+      }
+    };
+    function reconcileFaqs() {
+      // Finish closing the current answer before opening another: at most one
+      // details element is open, including during rapid keyboard/mouse changes.
+      faqItems.forEach(item => {
+        if (item !== requestedFaq && item.details.open) animateFaq(item, false);
       });
-      showHeroScene("exteriores");
-      heroControls.hidden = false;
+      if (requestedFaq && !faqItems.some(item => item !== requestedFaq && item.details.open)) {
+        animateFaq(requestedFaq, true);
+      }
     }
+    faqItems.forEach(item => {
+      item.summary.addEventListener("click", event => {
+        event.preventDefault();
+        requestedFaq = requestedFaq === item ? null : item;
+        reconcileFaqs();
+      });
+    });
+    faqItems.forEach(item => item.details.removeAttribute("name"));
+    settleFaqMotion = () => {
+      faqItems.forEach(item => settleFaq(item, false));
+      if (requestedFaq) settleFaq(requestedFaq, true);
+    };
+    settleFaqMotion();
+    window.addEventListener("resize", settleFaqMotion, { passive: true });
 
     // Only published records with an actual source image enter the portfolio.
     const photos = (Array.isArray(config.photos) ? config.photos : []).filter((photo) =>
@@ -213,9 +262,13 @@
       if (lightboxTitle) lightboxTitle.textContent = photo.title || categoryLabels[photo.category];
       if (lightboxCount) lightboxCount.textContent = `${lightboxIndex + 1} / ${filteredPhotos.length}`;
       if (lightboxSource) {
-        lightboxSource.href = instagramURL(photo.source) || officialInstagram;
-        lightboxSource.target = "_blank";
-        lightboxSource.rel = "noopener noreferrer";
+        const source = instagramURL(photo.source);
+        lightboxSource.hidden = !source;
+        if (source) {
+          lightboxSource.href = source;
+          lightboxSource.target = "_blank";
+          lightboxSource.rel = "noopener noreferrer";
+        } else lightboxSource.removeAttribute("href");
       }
       if (lightboxPrevious) lightboxPrevious.disabled = filteredPhotos.length < 2;
       if (lightboxNext) lightboxNext.disabled = filteredPhotos.length < 2;

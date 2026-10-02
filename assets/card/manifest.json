@@ -1,0 +1,55 @@
+{
+  "cardUrl": "https://ozzy-barbosa.github.io/alexa-lara/tarjeta.html",
+  "portfolioUrl": "https://ozzy-barbosa.github.io/alexa-lara/",
+  "instagram": "https://www.instagram.com/aleroblesfotografia/",
+  "telephone": "+526121044559",
+  "whatsapp": "https://wa.me/5216121044559",
+  "email": "alexalarar17@gmail.com",
+  "qr": {
+    "moduleCount": 33,
+    "quietZoneModules": 4,
+    "errorCorrection": "M"
+  },
+  "photo": "assets/instagram/6c7e0558e37a9d13-800.webp",
+  "photoTreatment": "Complete square, proportionally resized; no crop or color edits.",
+  "files": {
+    "alexa-lara-qr.svg": {
+      "bytes": 7994,
+      "sha256": "93bb23bfe5dcd0e626aa7fa66e6950b38b54b0a2305d137dd895fb406014ef67"
+    },
+    "alexa-lara-qr.png": {
+      "bytes": 2915,
+      "sha256": "d152f8da05f8b0c44627c9e493285d3e3db99449a879e057cda05eb6fefac38e",
+      "width": 656,
+      "height": 656
+    },
+    "alexa-lara-tarjeta.png": {
+      "bytes": 294949,
+      "sha256": "5142cfb218d495298a6c7cbcced1074b548fbcb11fc005c5fda7268016cb4d14",
+      "width": 1080,
+      "height": 1350
+    },
+    "alexa-lara-social.jpg": {
+      "bytes": 117131,
+      "sha256": "13620cb5d8036be5efae8975f1174e61b62b9fa6afe7932f3ef551293829cc27",
+      "width": 1200,
+      "height": 630
+    },
+    "alexa-lara.vcf": {
+      "bytes": 202,
+      "sha256": "d97be957da703a07b7846f0c8ceb340c3abbcc0e54ad9289e648390f9738d3ba"
+    }
+  },
+  "independentDecode": [
+    {
+      "file": "alexa-lara-qr.png",
+      "decoder": "ZXing-C++",
+      "decoded": "https://ozzy-barbosa.github.io/alexa-lara/tarjeta.html"
+    },
+    {
+      "file": "alexa-lara-tarjeta.png",
+      "decoder": "ZXing-C++",
+      "decoded": "https://ozzy-barbosa.github.io/alexa-lara/tarjeta.html"
+    }
+  ]
+}

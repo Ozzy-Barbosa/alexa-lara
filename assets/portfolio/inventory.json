@@ -1,0 +1,419 @@
+[
+  {
+    "id": "client-0e241686bc2190ec",
+    "sha256": "0e241686bc2190ec9bed79c340b92842ba9854750aeb8b43771ac5c124c7b73e",
+    "sourceFiles": [
+      "IMG_2566.JPG.jpeg"
+    ],
+    "provenance": "client",
+    "source": "",
+    "category": "exteriores",
+    "reviewStatus": "selected",
+    "originalWidth": 2943,
+    "originalHeight": 3915,
+    "variants": [
+      {
+        "file": "client-0e241686bc2190ec-800.webp",
+        "width": 601,
+        "height": 800,
+        "bytes": 21400
+      },
+      {
+        "file": "client-0e241686bc2190ec-1600.webp",
+        "width": 1203,
+        "height": 1600,
+        "bytes": 60262
+      }
+    ],
+    "title": "La última luz",
+    "alt": "Mujer de pie en la orilla del mar bajo la luz dorada del atardecer",
+    "duplicateOfInstagram": "6c7baf05c3cd4e0c",
+    "notes": "Sustituye la copia provisional de Instagram de la misma composición por el archivo entregado por el cliente; no se duplica en el catálogo."
+  },
+  {
+    "id": "client-eb564a12cb2ba25d",
+    "sha256": "eb564a12cb2ba25dd7d882921c912ac34616deac54478375c0dcd8e24d4f5345",
+    "sourceFiles": [
+      "IMG_2579.JPG.jpeg"
+    ],
+    "provenance": "client",
+    "source": "",
+    "category": "retratos",
+    "reviewStatus": "selected",
+    "originalWidth": 4959,
+    "originalHeight": 3302,
+    "variants": [
+      {
+        "file": "client-eb564a12cb2ba25d-800.webp",
+        "width": 800,
+        "height": 533,
+        "bytes": 18244
+      },
+      {
+        "file": "client-eb564a12cb2ba25d-1600.webp",
+        "width": 1600,
+        "height": 1065,
+        "bytes": 55566
+      }
+    ],
+    "title": "La luz sobre ti",
+    "alt": "Retrato de una mujer junto al mar, iluminada por la luz cálida del atardecer",
+    "notes": "Retrato horizontal con el rostro en la mitad derecha; adecuado para portada con texto a la izquierda."
+  },
+  {
+    "id": "client-ef8e6eae51b8005e",
+    "sha256": "ef8e6eae51b8005e9e39478c6db7211a3bca44f7425a3c040899fe475d754a61",
+    "sourceFiles": [
+      "IMG_2586.JPG.jpeg"
+    ],
+    "provenance": "client",
+    "source": "",
+    "category": "exteriores",
+    "reviewStatus": "selected",
+    "originalWidth": 2132,
+    "originalHeight": 3228,
+    "variants": [
+      {
+        "file": "client-ef8e6eae51b8005e-800.webp",
+        "width": 528,
+        "height": 800,
+        "bytes": 30256
+      },
+      {
+        "file": "client-ef8e6eae51b8005e-1600.webp",
+        "width": 1057,
+        "height": 1600,
+        "bytes": 85564
+      }
+    ],
+    "title": "Al caer la tarde",
+    "alt": "Retrato de una mujer con las manos cerca del rostro junto a la playa al atardecer"
+  },
+  {
+    "id": "client-31ef8e0be15acc42",
+    "sha256": "31ef8e0be15acc4247bd1c1205f8764a1c4ad105105cbf3ba6cc72a9a1a5822b",
+    "sourceFiles": [
+      "IMG_4640.PNG"
+    ],
+    "provenance": "client",
+    "source": "",
+    "category": "editorial",
+    "reviewStatus": "selected",
+    "originalWidth": 1032,
+    "originalHeight": 1498,
+    "variants": [
+      {
+        "file": "client-31ef8e0be15acc42-800.webp",
+        "width": 551,
+        "height": 800,
+        "bytes": 46102
+      },
+      {
+        "file": "client-31ef8e0be15acc42-1600.webp",
+        "width": 1032,
+        "height": 1498,
+        "bytes": 120348
+      }
+    ],
+    "title": "Junto a la ventana",
+    "alt": "Retrato editorial de una mujer con sombrero, pantalón de mezclilla y botas, sentada junto a una ventana"
+  },
+  {
+    "id": "client-c6ce56d54bcea129",
+    "sha256": "c6ce56d54bcea129cd67ac69529172319c31206f730176ff7289dfa6fe03ce74",
+    "sourceFiles": [
+      "IMG_4641.PNG"
+    ],
+    "provenance": "client",
+    "source": "",
+    "category": "editorial",
+    "reviewStatus": "selected",
+    "originalWidth": 1013,
+    "originalHeight": 1387,
+    "variants": [
+      {
+        "file": "client-c6ce56d54bcea129-800.webp",
+        "width": 584,
+        "height": 800,
+        "bytes": 40544
+      },
+      {
+        "file": "client-c6ce56d54bcea129-1600.webp",
+        "width": 1013,
+        "height": 1387,
+        "bytes": 137404
+      }
+    ],
+    "title": "Una actitud propia",
+    "alt": "Mujer sentada en una silla de madera con sombrero oscuro y vestuario de inspiración western"
+  },
+  {
+    "id": "client-fe0e54cb54c35a27",
+    "sha256": "fe0e54cb54c35a27e48ae2b187f3e1e050a15194ff2ef379c72b71c73969df80",
+    "sourceFiles": [
+      "IMG_4643.PNG"
+    ],
+    "provenance": "client",
+    "source": "",
+    "category": "editorial",
+    "reviewStatus": "selected",
+    "originalWidth": 1013,
+    "originalHeight": 1483,
+    "variants": [
+      {
+        "file": "client-fe0e54cb54c35a27-800.webp",
+        "width": 546,
+        "height": 800,
+        "bytes": 56538
+      },
+      {
+        "file": "client-fe0e54cb54c35a27-1600.webp",
+        "width": 1013,
+        "height": 1483,
+        "bytes": 191662
+      }
+    ],
+    "title": "Entre madera y sombra",
+    "alt": "Retrato editorial de una mujer sentada en escalones de madera, con chaqueta negra, jeans y botas"
+  },
+  {
+    "id": "client-317deed13d63c35f",
+    "sha256": "317deed13d63c35fbaa5293eb34655eda7bd61b776c3c1946945e267b2640279",
+    "sourceFiles": [
+      "WhatsApp Image 2026-10-01 at 8.13.23 PM.jpeg",
+      "WhatsApp Image 2026-10-01 at 8.15.28 PM.jpeg"
+    ],
+    "provenance": "client",
+    "source": "",
+    "category": "retratos",
+    "reviewStatus": "selected",
+    "originalWidth": 775,
+    "originalHeight": 1280,
+    "variants": [
+      {
+        "file": "client-317deed13d63c35f-800.webp",
+        "width": 484,
+        "height": 800,
+        "bytes": 43688
+      },
+      {
+        "file": "client-317deed13d63c35f-1600.webp",
+        "width": 775,
+        "height": 1280,
+        "bytes": 77266
+      }
+    ],
+    "title": "Entre luces suaves",
+    "alt": "Mujer de espaldas mirando a cámara con una prenda estampada, rodeada de plantas y madera",
+    "notes": "Dos archivos de WhatsApp idénticos por SHA-256 se conservan como una sola composición."
+  },
+  {
+    "id": "client-a0a9a70ed47c7686",
+    "sha256": "a0a9a70ed47c768627f9574e9f7a7099558af92d3b6e640988b46ecceb00c3b7",
+    "sourceFiles": [
+      "WhatsApp Image 2026-10-01 at 8.13.50 PM.jpeg"
+    ],
+    "provenance": "client",
+    "source": "",
+    "category": "retratos",
+    "reviewStatus": "duplicate-existing",
+    "originalWidth": 1020,
+    "originalHeight": 1280,
+    "variants": [
+      {
+        "file": "client-a0a9a70ed47c7686-800.webp",
+        "width": 637,
+        "height": 800,
+        "bytes": 50704
+      },
+      {
+        "file": "client-a0a9a70ed47c7686-1600.webp",
+        "width": 1020,
+        "height": 1280,
+        "bytes": 92400
+      }
+    ],
+    "title": "A su manera",
+    "alt": "Mujer sentada en un sillón con vestuario estampado y pantalón blanco",
+    "duplicateOfInstagram": "0691c1a207ac7375",
+    "notes": "No se añade una segunda entrada; el catálogo ya contiene la misma composición a mayor resolución."
+  },
+  {
+    "id": "client-f23552b6773fb9f7",
+    "sha256": "f23552b6773fb9f7d000486b1148fc514b2869c10c339649b4dad94764a5cc2b",
+    "sourceFiles": [
+      "WhatsApp Image 2026-10-01 at 8.14.14 PM.jpeg"
+    ],
+    "provenance": "client",
+    "source": "",
+    "category": "exteriores",
+    "reviewStatus": "duplicate-existing",
+    "originalWidth": 853,
+    "originalHeight": 1279,
+    "variants": [
+      {
+        "file": "client-f23552b6773fb9f7-800.webp",
+        "width": 534,
+        "height": 800,
+        "bytes": 84230
+      },
+      {
+        "file": "client-f23552b6773fb9f7-1600.webp",
+        "width": 853,
+        "height": 1279,
+        "bytes": 170382
+      }
+    ],
+    "title": "Sin prisa",
+    "alt": "Retrato de mujer junto a un árbol y una cerca de madera",
+    "duplicateOfInstagram": "2d306aeaa0b33a09",
+    "notes": "Encuadre de la misma fotografía, con firma original. No duplicar la entrada existente; conservar este archivo entregado sin alteraciones."
+  },
+  {
+    "id": "client-c68bec2cce94660d",
+    "sha256": "c68bec2cce94660df70644dd0caefecd5ba36bd52011f3f15a41c191abe2f9b9",
+    "sourceFiles": [
+      "WhatsApp Image 2026-10-01 at 8.19.54 PM.jpeg"
+    ],
+    "provenance": "client",
+    "source": "",
+    "category": "exteriores",
+    "reviewStatus": "duplicate-existing",
+    "originalWidth": 771,
+    "originalHeight": 1280,
+    "variants": [
+      {
+        "file": "client-c68bec2cce94660d-800.webp",
+        "width": 482,
+        "height": 800,
+        "bytes": 93002
+      },
+      {
+        "file": "client-c68bec2cce94660d-1600.webp",
+        "width": 771,
+        "height": 1280,
+        "bytes": 176336
+      }
+    ],
+    "title": "Entre palmeras",
+    "alt": "Retrato de una mujer bajo una palapa rodeada de vegetación tropical",
+    "duplicateOfInstagram": "e157d921d65da218",
+    "notes": "Encuadre más estrecho de la misma fotografía que ya consta en el catálogo a mayor resolución; no se añade otra entrada."
+  },
+  {
+    "id": "client-3b2595626fbf508d",
+    "sha256": "3b2595626fbf508d821e4c0c01842634454f07a8ecca9b11ae847f5538544252",
+    "sourceFiles": [
+      "WhatsApp Image 2026-10-01 at 8.30.19 PM.jpeg"
+    ],
+    "provenance": "client",
+    "source": "",
+    "category": "producto",
+    "reviewStatus": "selected",
+    "originalWidth": 1280,
+    "originalHeight": 1024,
+    "variants": [
+      {
+        "file": "client-3b2595626fbf508d-800.webp",
+        "width": 800,
+        "height": 640,
+        "bytes": 38834
+      },
+      {
+        "file": "client-3b2595626fbf508d-1600.webp",
+        "width": 1280,
+        "height": 1024,
+        "bytes": 79390
+      }
+    ],
+    "title": "Los detalles cuentan",
+    "alt": "Detalle de jeans y botas negras en una composición de moda sobre una silla de madera"
+  },
+  {
+    "id": "client-dda36444dea92a62",
+    "sha256": "dda36444dea92a62cf183865cb2b7384c9f61f65d77fe8e8c393ffbef14cce8a",
+    "sourceFiles": [
+      "WhatsApp Image 2026-10-01 at 8.30.55 PM.jpeg"
+    ],
+    "provenance": "client",
+    "source": "",
+    "category": "producto",
+    "reviewStatus": "selected",
+    "originalWidth": 815,
+    "originalHeight": 1280,
+    "variants": [
+      {
+        "file": "client-dda36444dea92a62-800.webp",
+        "width": 509,
+        "height": 800,
+        "bytes": 36576
+      },
+      {
+        "file": "client-dda36444dea92a62-1600.webp",
+        "width": 815,
+        "height": 1280,
+        "bytes": 71998
+      }
+    ],
+    "title": "Texturas en negro",
+    "alt": "Abrigo negro con cuello de textura suave colgado en una percha al aire libre"
+  },
+  {
+    "id": "client-6adccfb9dd6283d8",
+    "sha256": "6adccfb9dd6283d85789264f828c50b6e3d2de3d0aedfe0a7aaba9318572e0b2",
+    "sourceFiles": [
+      "WhatsApp Image 2026-10-01 at 8.31.28 PM.jpeg"
+    ],
+    "provenance": "client",
+    "source": "",
+    "category": "producto",
+    "reviewStatus": "selected",
+    "originalWidth": 853,
+    "originalHeight": 1280,
+    "variants": [
+      {
+        "file": "client-6adccfb9dd6283d8-800.webp",
+        "width": 533,
+        "height": 800,
+        "bytes": 58924
+      },
+      {
+        "file": "client-6adccfb9dd6283d8-1600.webp",
+        "width": 853,
+        "height": 1280,
+        "bytes": 124826
+      }
+    ],
+    "title": "Prendas con carácter",
+    "alt": "Detalle de una prenda estampada sostenida junto a jeans y botas negras"
+  },
+  {
+    "id": "client-9f39881809abc738",
+    "sha256": "9f39881809abc7383038cf988f02d8b28ba01a280ff72fddb010235c20d9c217",
+    "sourceFiles": [
+      "WhatsApp Image 2026-10-01 at 8.31.54 PM.jpeg"
+    ],
+    "provenance": "client",
+    "source": "",
+    "category": "producto",
+    "reviewStatus": "selected",
+    "originalWidth": 1280,
+    "originalHeight": 853,
+    "variants": [
+      {
+        "file": "client-9f39881809abc738-800.webp",
+        "width": 800,
+        "height": 533,
+        "bytes": 40990
+      },
+      {
+        "file": "client-9f39881809abc738-1600.webp",
+        "width": 1280,
+        "height": 853,
+        "bytes": 91510
+      }
+    ],
+    "title": "Cada paso",
+    "alt": "Detalle de botas negras de tacón y pantalón de mezclilla sobre escalones de madera"
+  }
+]
