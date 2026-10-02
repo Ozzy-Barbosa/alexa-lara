@@ -39,7 +39,7 @@ Acceso comprobado al perfil de Instagram y a las imágenes renderizadas de su cu
 
 ## Límites
 
-El WhatsApp real y el dominio siguen pendientes. No se probó un envío real por WhatsApp, no se activó un backend ni se desplegó el hosting. La activación automática del ajuste de movimiento del sistema se revisó en código; el botón manual sí se probó en navegador.
+El WhatsApp real y el dominio propio siguen pendientes. No se probó un envío real por WhatsApp ni se activó un backend. El sitio se publicó posteriormente en GitHub Pages; véase el [registro de publicación](PUBLICACION.md). La activación automática del ajuste de movimiento del sistema se revisó en código; el botón manual sí se probó en navegador.
 
 Las comprobaciones visuales se realizaron con el navegador integrado. La herramienta de navegador independiente no pudo iniciar su motor instalado, por lo que se utilizó el navegador disponible sin alterar sus protecciones.
 
