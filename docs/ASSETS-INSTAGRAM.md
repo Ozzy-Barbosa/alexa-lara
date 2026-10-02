@@ -4,7 +4,22 @@ Origen solicitado por el cliente: [@aleroblesfotografia](https://www.instagram.c
 
 El perfil y las publicaciones visibles fueron consultados en el navegador durante el rediseño. Se descargaron 24 imágenes observadas: la fotografía del perfil y 23 imágenes de publicaciones, incluidas colaboraciones visibles en ese perfil. Las direcciones CDN temporales no forman parte del sitio ni se necesitan para servir las fotografías.
 
-Consulta realizada el 1 de octubre de 2026. El perfil visible mostraba «Alexa Lara Fotógrafa», 28 publicaciones y «Sesiones por DM · Ensenada–La Paz». [Captura del perfil](previews/instagram-perfil.png). El sitio usa 22 fotografías distintas en la galería y el retrato del perfil en la presentación; la tarjeta informativa queda fuera de la galería.
+Consulta realizada el 1 de octubre de 2026. El perfil visible mostraba «Alexa Lara Fotógrafa», 28 publicaciones y «Sesiones por DM · Ensenada–La Paz». [Captura del perfil](previews/instagram-perfil.png). El sitio usa 22 fotografías distintas en la galería; la tarjeta informativa queda fuera de ella. La fotografía de presentación se corrigió con el perfil personal señalado por el usuario, como se detalla abajo.
+
+## Corrección de identidad en la presentación
+
+El usuario aclaró que la fotografía `4431622a34d5865a` corresponde a una modelo, no a Alexa. Se retira su uso como retrato de Alexa en la biografía y se conserva como trabajo fotográfico en la galería, con su fuente original.
+
+Para la presentación se utiliza la fotografía de perfil de la cuenta personal [@alexalrb](https://www.instagram.com/alexalrb/), indicada expresamente por el usuario. El navegador la mostró con la etiqueta «Foto del perfil de alexalrb» y resolución natural de 1080 × 1080 píxeles. La atribución procede de la indicación del usuario y del contexto de la cuenta y su etiqueta; no de una comparación facial.
+
+Nuevo identificador: `b796915b4d08c4fb`. Las variantes viven por separado en `assets/alexa/`; el inventario previo de `assets/instagram/` no se modifica.
+
+| Archivo | Dimensiones reales | Peso |
+|---|---|---|
+| `assets/alexa/b796915b4d08c4fb-800.webp` | 800 × 800 px | 43,060 bytes |
+| `assets/alexa/b796915b4d08c4fb-1600.webp` | 1080 × 1080 px | 71,724 bytes |
+
+Total de las dos variantes: 114,784 bytes. Se conserva el encuadre cuadrado completo y los colores; la variante de 1600 conserva los 1080 px originales, sin ampliar. `assets/alexa/inventory.json` contiene sus dimensiones y pesos, y `assets/alexa/contact-sheet.jpg` permite su revisión interna. Preparadas con `scripts/prepare-images.py` y revisadas visualmente después de la conversión.
 
 ## Archivos y tratamiento
 

@@ -30,5 +30,23 @@ assert.equal((html.match(/<h1\b/g)||[]).length,1,"Debe existir un único H1.");
 assert(!/unsplash|example\.com/i.test(html),"El HTML conserva referencias provisionales incorrectas.");
 assert(!/example\.com/.test(fs.readFileSync(path.join(root,"robots.txt"),"utf8")),"Robots conserva dominio ficticio.");
 JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+const privacy = fs.readFileSync(path.join(root,"privacidad.html"),"utf8");
+assert.equal((privacy.match(/<h1\b/g)||[]).length,1,"Privacidad debe tener un único H1.");
+assert(privacy.includes('name="robots" content="noindex,follow"'),"El aviso inicial no debe indexarse.");
+for (const filename of ["index.html", "privacidad.html"]) {
+  const document = fs.readFileSync(path.join(root,filename),"utf8");
+  for (const match of document.matchAll(/\b(?:src|href)="([^"]+)"/g)) {
+    if (/^(?:https?:|mailto:|tel:|data:|#)/.test(match[1])) continue;
+    const [localPath, anchor] = match[1].split("#");
+    const target = localPath === "./" ? "index.html" : localPath;
+    assert(fs.existsSync(path.join(root,target)), "Enlace local ausente: " + match[1]);
+    if (anchor) assert(fs.readFileSync(path.join(root,target),"utf8").includes(`id="${anchor}"`), "Ancla enlazada ausente: " + match[1]);
+  }
+}
+assert.equal((html.match(/<details(?:\s|>)/g)||[]).length,6,"Se esperan seis preguntas frecuentes.");
+for (const id of ["form-next","form-back","edit-message","form-step-label","message-count"]) assert(ids.includes(id), "Falta control del formulario: " + id);
+assert(html.includes('assets/alexa/b796915b4d08c4fb-800.webp'),"La biografía debe usar el perfil personal confirmado.");
+assert(!html.includes('class="about-detail" src="assets/instagram/4431622a34d5865a'),"La modelo no debe presentarse como Alexa.");
 console.log("OK: " + photos.length + " fotografías únicas, archivos locales, anclas, metadatos e IDs.");
 console.log("OK: " + data.futureSlots.length + " posiciones reservadas, no publicadas.");
+console.log("OK: seis FAQ, controles del formulario y página de privacidad enlazada.");

@@ -67,20 +67,56 @@
       if (document.body.classList.contains("menu-open") &&
           !menu?.contains(event.target) && !menuToggle?.contains(event.target)) setMenu(false);
     });
-    desktop.addEventListener("change", () => { setMenu(false); requestScrollUpdate(); });
+    desktop.addEventListener("change", () => { setMenu(false); resetPointerTilt(); requestScrollUpdate(); });
     setMenu(false);
 
     // Motion never overrides the visitor's system preference.
-    const motionToggle = $(".motion-toggle");
+    const motionToggles = $$(".motion-toggle");
+    const heroComposition = $(".hero-composition");
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
     let manuallyPaused = false;
     const motionIsOff = () => reducedMotion.matches || manuallyPaused;
+    let pointerFrame = 0;
+    let pointerPosition = null;
+    function resetPointerTilt() {
+      window.cancelAnimationFrame(pointerFrame);
+      pointerFrame = 0;
+      pointerPosition = null;
+      heroComposition?.style.setProperty("--pointer-x", "0deg");
+      heroComposition?.style.setProperty("--pointer-y", "0deg");
+    }
+    const renderPointerTilt = () => {
+      pointerFrame = 0;
+      if (!heroComposition || !pointerPosition || motionIsOff() || !desktop.matches || !finePointer.matches) {
+        resetPointerTilt();
+        return;
+      }
+      const bounds = heroComposition.getBoundingClientRect();
+      if (!bounds.width || !bounds.height) return;
+      const x = Math.max(-1, Math.min(1, (pointerPosition.x - bounds.left) / bounds.width * 2 - 1));
+      const y = Math.max(-1, Math.min(1, (pointerPosition.y - bounds.top) / bounds.height * 2 - 1));
+      heroComposition.style.setProperty("--pointer-x", `${(x * 2.2).toFixed(2)}deg`);
+      heroComposition.style.setProperty("--pointer-y", `${(-y * 1.6).toFixed(2)}deg`);
+    };
+    heroComposition?.addEventListener("pointermove", (event) => {
+      if (event.pointerType === "touch" || motionIsOff() || !desktop.matches || !finePointer.matches) return;
+      pointerPosition = { x: event.clientX, y: event.clientY };
+      if (!pointerFrame) pointerFrame = window.requestAnimationFrame(renderPointerTilt);
+    }, { passive: true });
+    heroComposition?.addEventListener("pointerleave", resetPointerTilt);
+    heroComposition?.addEventListener("pointercancel", resetPointerTilt);
+    finePointer.addEventListener("change", resetPointerTilt);
+    window.addEventListener("blur", resetPointerTilt);
     let revealObserver;
     const reveal = (element) => {
       element.classList.add("is-visible");
       revealObserver?.unobserve(element);
     };
     const observeReveals = (elements) => {
-      elements.forEach((element) => {
+      elements.forEach((element, index) => {
+        const configuredDelay = Number(element.dataset.revealDelay);
+        const delay = Number.isFinite(configuredDelay) ? Math.min(240, Math.max(0, configuredDelay)) : (index % 3) * 65;
+        element.style.setProperty("--reveal-delay", `${delay}ms`);
         if (motionIsOff() || !revealObserver) reveal(element);
         else {
           element.classList.add("reveal-ready");
@@ -99,7 +135,7 @@
       const paused = motionIsOff();
       document.body.classList.toggle("motion-paused", paused);
       document.documentElement.dataset.motion = paused ? "reduced" : "full";
-      if (motionToggle) {
+      motionToggles.forEach((motionToggle) => {
         motionToggle.setAttribute("aria-pressed", String(paused));
         const label = reducedMotion.matches ? "Movimiento reducido" : paused ? "Activar movimiento" : "Pausar movimiento";
         const labelNode = $("[data-motion-label]", motionToggle);
@@ -107,14 +143,17 @@
         else motionToggle.textContent = label;
         motionToggle.setAttribute("aria-label", label);
         motionToggle.disabled = reducedMotion.matches;
+      });
+      if (paused) {
+        $$(".reveal-ready").forEach(reveal);
+        resetPointerTilt();
       }
-      if (paused) $$(".reveal-ready").forEach(reveal);
       requestScrollUpdate();
     };
-    motionToggle?.addEventListener("click", () => {
+    motionToggles.forEach((motionToggle) => motionToggle.addEventListener("click", () => {
       manuallyPaused = !manuallyPaused;
       applyMotionPreference();
-    });
+    }));
     reducedMotion.addEventListener("change", applyMotionPreference);
 
     const header = $(".site-header");
@@ -333,8 +372,20 @@
     const messagePreview = $("#message-preview");
     const copyMessage = $("#copy-message");
     const sendWhatsApp = $("#send-whatsapp");
+    const formNext = $("#form-next");
+    const formBack = $("#form-back");
+    const formStepLabel = $("#form-step-label");
+    const stepIndicators = $$("[data-step-indicator]");
+    const formSteps = quoteForm ? $$("fieldset[data-form-step]", quoteForm) : [];
+    const hasFormSteps = formSteps.length === 2;
+    const editMessage = $("#edit-message");
+    const messageCount = $("#message-count");
     const nameField = quoteForm?.elements.namedItem("nombre");
     const dateField = quoteForm?.elements.namedItem("fecha");
+    const messageField = quoteForm?.elements.namedItem("mensaje");
+    const serviceField = quoteForm?.elements.namedItem("servicio");
+    let currentFormStep = 1;
+    let resultVisible = false;
     const localDate = () => {
       const now = new Date();
       return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
@@ -342,34 +393,120 @@
     if (dateField) dateField.min = localDate();
     [["nombre", 80], ["lugar", 180], ["mensaje", 1200]].forEach(([name, length]) => {
       const field = quoteForm?.elements.namedItem(name);
-      if (field && !field.hasAttribute("maxlength")) field.maxLength = length;
+      if (field && "maxLength" in field && !field.hasAttribute("maxlength")) field.maxLength = length;
     });
-    nameField?.addEventListener("input", () => nameField.setCustomValidity(""));
+    const updateMessageCount = () => {
+      if (!messageCount || !messageField) return;
+      messageCount.textContent = `${messageField.value.length} / ${messageField.maxLength > 0 ? messageField.maxLength : 1200}`;
+    };
+    updateMessageCount();
     const invalidateMessage = () => {
       if (messageResult) messageResult.hidden = true;
+      if (messagePreview) messagePreview.value = "";
       if (sendWhatsApp) { sendWhatsApp.hidden = true; sendWhatsApp.removeAttribute("href"); }
       if (formStatus) formStatus.textContent = "";
+      resultVisible = false;
     };
+    const updateStepIndicators = (step, complete = false) => {
+      stepIndicators.forEach((indicator) => {
+        const number = Number(indicator.dataset.stepIndicator);
+        const active = !complete && number === step;
+        const done = complete || number < step;
+        indicator.classList.toggle("is-active", active);
+        indicator.classList.toggle("is-complete", done);
+        indicator.dataset.state = active ? "current" : done ? "complete" : "upcoming";
+        if (active) indicator.setAttribute("aria-current", "step");
+        else indicator.removeAttribute("aria-current");
+      });
+      if (formStepLabel) formStepLabel.textContent = complete
+        ? "Tu consulta está lista para revisar"
+        : step === 1 ? "Paso 1 de 2 · Tu sesión" : "Paso 2 de 2 · Sobre ti";
+    };
+    const showFormStep = (step, focus = false) => {
+      currentFormStep = step;
+      invalidateMessage();
+      if (quoteForm) quoteForm.dataset.formState = `step-${step}`;
+      formSteps.forEach((fieldset) => {
+        const active = Number(fieldset.dataset.formStep) === step;
+        fieldset.hidden = !active;
+        fieldset.disabled = !active;
+      });
+      updateStepIndicators(step);
+      if (focus) {
+        const fieldset = formSteps.find((item) => Number(item.dataset.formStep) === step);
+        const firstField = fieldset ? $("input,select,textarea", fieldset) : nameField;
+        firstField?.focus({ preventScroll: true });
+        quoteForm?.scrollIntoView({ behavior: motionIsOff() ? "auto" : "smooth", block: "start" });
+      }
+    };
+    const clearFieldError = (field) => {
+      if (typeof field.setCustomValidity === "function") field.setCustomValidity("");
+      field.removeAttribute("aria-invalid");
+    };
+    const validateStep = (step) => {
+      if (dateField) dateField.min = localDate();
+      if ((step === 2 || !hasFormSteps) && nameField) {
+        nameField.value = nameField.value.trim();
+        nameField.setCustomValidity(nameField.value.length < 2 ? "Escribe tu nombre para preparar la consulta." : "");
+      }
+      const fieldset = formSteps.find((item) => Number(item.dataset.formStep) === step);
+      const wasDisabled = fieldset?.disabled;
+      // Temporarily enable the inactive step so its current values can be checked.
+      if (fieldset) fieldset.disabled = false;
+      const fields = quoteForm ? $$("input,select,textarea", fieldset || quoteForm) : [];
+      let firstInvalid = null;
+      fields.forEach((field) => {
+        if (!field.willValidate) return;
+        const valid = field.checkValidity();
+        if (valid) field.removeAttribute("aria-invalid");
+        else {
+          field.setAttribute("aria-invalid", "true");
+          if (!firstInvalid) firstInvalid = field;
+        }
+      });
+      if (fieldset) fieldset.disabled = wasDisabled;
+      if (!firstInvalid) return true;
+      if (hasFormSteps) showFormStep(step);
+      if (formStatus) formStatus.textContent = firstInvalid.validationMessage || "Revisa el campo indicado para continuar.";
+      firstInvalid.focus();
+      firstInvalid.reportValidity();
+      return false;
+    };
+    const continueForm = () => {
+      if (validateStep(1)) showFormStep(2, true);
+    };
+    // JS owns validation so a hidden required field never traps submission.
+    // The no-JS version links directly to Instagram instead of exposing this form.
+    if (quoteForm) quoteForm.noValidate = true;
+    if (hasFormSteps) showFormStep(1);
+    formNext?.addEventListener("click", continueForm);
+    formBack?.addEventListener("click", () => showFormStep(1, true));
+    editMessage?.addEventListener("click", () => showFormStep(1, true));
     quoteForm?.addEventListener("input", (event) => {
-      if (event.target !== messagePreview) invalidateMessage();
+      if (event.target === messagePreview) return;
+      clearFieldError(event.target);
+      if (resultVisible) showFormStep(currentFormStep);
+      else invalidateMessage();
+      updateMessageCount();
     });
     $$("[data-service]").forEach((link) => link.addEventListener("click", () => {
-      const serviceField = quoteForm?.elements.namedItem("servicio");
       if (serviceField && [...serviceField.options].some((option) => option.value === link.dataset.service)) {
         serviceField.value = link.dataset.service;
-        invalidateMessage();
+        clearFieldError(serviceField);
+        if (hasFormSteps) showFormStep(1);
+        else invalidateMessage();
       }
     }));
     quoteForm?.addEventListener("submit", (event) => {
       event.preventDefault();
-      if (nameField) {
-        nameField.value = nameField.value.trim();
-        nameField.setCustomValidity(nameField.value.length < 2 ? "Escribe tu nombre para preparar la consulta." : "");
+      if (resultVisible) return;
+      if (hasFormSteps && currentFormStep === 1) {
+        continueForm();
+        return;
       }
-      if (dateField) dateField.min = localDate();
-      if (!quoteForm.reportValidity()) return;
-      const form = new FormData(quoteForm);
-      const value = (name) => String(form.get(name) || "").trim();
+      if (!validateStep(1) || (hasFormSteps && !validateStep(2))) return;
+      // Read controls directly: inactive fieldsets are deliberately disabled.
+      const value = (name) => String(quoteForm.elements.namedItem(name)?.value || "").trim();
       const rawDate = value("fecha");
       const formattedDate = rawDate
         ? new Intl.DateTimeFormat("es-MX", { dateStyle: "long" }).format(new Date(`${rawDate}T12:00:00`))
@@ -382,6 +519,10 @@
       ].join("\n");
       if (messagePreview) messagePreview.value = message;
       if (messageResult) messageResult.hidden = false;
+      formSteps.forEach((fieldset) => { fieldset.hidden = true; fieldset.disabled = true; });
+      resultVisible = true;
+      quoteForm.dataset.formState = "ready";
+      updateStepIndicators(2, true);
       const rawNumber = String(config.whatsapp || "").trim();
       const number = rawNumber.replace(/^\+/, "");
       const hasWhatsApp = /^[1-9]\d{9,14}$/.test(number);
@@ -402,6 +543,14 @@
         messageResult.scrollIntoView({ behavior: motionIsOff() ? "auto" : "smooth", block: "nearest" });
       }
     });
+    quoteForm?.addEventListener("reset", () => {
+      window.requestAnimationFrame(() => {
+        $$("input,select,textarea", quoteForm).forEach(clearFieldError);
+        if (hasFormSteps) showFormStep(1);
+        else invalidateMessage();
+        updateMessageCount();
+      });
+    });
     copyMessage?.addEventListener("click", async () => {
       if (!messagePreview?.value) return;
       try {
@@ -415,6 +564,10 @@
         if (formStatus) formStatus.textContent = "Seleccionamos tu mensaje. Usa la opción Copiar de tu dispositivo y pégalo en Instagram.";
       }
     });
+
+    // Reveal only after handlers exist, avoiding accidental native GET submissions
+    // if the script fails to load or initialization is interrupted.
+    if (quoteForm) quoteForm.hidden = false;
 
     // Keep the header's section indicator in sync without changing the URL.
     if ("IntersectionObserver" in window && menu) {
