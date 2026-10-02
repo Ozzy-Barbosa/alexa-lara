@@ -1,0 +1,3 @@
+# Preserve generated downloads byte-for-byte (vCard 3.0 requires CRLF).
+assets/card/alexa-lara.vcf -text
+assets/card/alexa-lara-qr.svg -text
