@@ -5,6 +5,7 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const root = new URL("../", import.meta.url);
+const socialImageFile = "alexa-lara-social-v7.jpg";
 const escape = value => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 const pattern = value => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const usage = "npm run configure -- https://tu-dominio.com/subcarpeta/ [--python ruta/al/python] [--dry-run]";
@@ -29,9 +30,16 @@ function canonical(html, url) {
 
 function socialMetadata(html, pageUrl, imageUrl) {
   html = canonical(html, pageUrl);
+  // Preserve the approved image description; deployment must not invent one.
+  const imageAlt = html.match(/<meta\s+property="og:image:alt"[^>]*content="([^"]*)"[^>]*>/)?.[1];
+  if (!imageAlt?.trim()) throw new Error("Falta una descripción no vacía en og:image:alt para " + pageUrl);
   for (const [name, value] of [["og:url", pageUrl], ["og:image", imageUrl], ["og:image:width", "1200"], ["og:image:height", "630"], ["og:image:type", "image/jpeg"]]) {
     html = meta(html, "property", name, value);
   }
+  // Put the structured HTTPS property directly after its image root, even when
+  // upgrading a page that did not previously declare it.
+  html = html.replace(/\s*<meta\s+property="og:image:secure_url"[^>]*>/g, "");
+  html = html.replace(/(<meta\s+property="og:image"[^>]*>)/, `$1\n  <meta property="og:image:secure_url" content="${escape(imageUrl)}">`);
   html = meta(html, "name", "twitter:card", "summary_large_image");
   return meta(html, "name", "twitter:image", imageUrl);
 }
@@ -41,7 +49,7 @@ async function brandAssetsCurrent(site) {
     const manifest = JSON.parse(await readFile(new URL("assets/card/manifest.json", root), "utf8"));
     const cardUrl = new URL("tarjeta.html", site).href;
     if (manifest.cardUrl !== cardUrl || manifest.portfolioUrl !== site.href) return false;
-    for (const name of ["alexa-lara-qr.svg", "alexa-lara-qr.png", "alexa-lara-tarjeta.png", "alexa-lara-social.jpg", "alexa-lara.vcf"]) {
+    for (const name of ["alexa-lara-qr.svg", "alexa-lara-qr.png", "alexa-lara-tarjeta.png", socialImageFile, "alexa-lara.vcf"]) {
       const buffer = await readFile(new URL(`assets/card/${name}`, root));
       if (createHash("sha256").update(buffer).digest("hex") !== manifest.files?.[name]?.sha256) return false;
     }
@@ -80,7 +88,7 @@ async function main() {
     readFile(new URL("404.html", root), "utf8"),
     optionalFile("tarjeta.html")
   ]);
-  const imageUrl = new URL("assets/card/alexa-lara-social.jpg", site).href;
+  const imageUrl = new URL(`assets/card/${socialImageFile}`, site).href;
   const cardUrl = new URL("tarjeta.html", site).href;
   const changes = new Map();
   changes.set("index.html", socialMetadata(index, site.href, imageUrl));

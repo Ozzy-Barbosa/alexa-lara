@@ -19,7 +19,7 @@ No se incorporaron domicilio, precios, horarios ni campos personales no confirma
 | Archivo dentro de `assets/card/` | Formato / dimensiones | Peso generado |
 | --- | --- | --- |
 | `alexa-lara-tarjeta.png` | Tarjeta vertical, 1080 × 1350 px | 294,949 bytes |
-| `alexa-lara-social.jpg` | Vista previa, 1200 × 630 px | 117,131 bytes |
+| `alexa-lara-social-v7.jpg` | Vista previa centrada, 1200 × 630 px | 92,514 bytes |
 | `alexa-lara-qr.png` | QR, 656 × 656 px | 2,915 bytes |
 | `alexa-lara-qr.svg` | QR vectorial, escalable | 7,994 bytes |
 | `alexa-lara.vcf` | Contacto vCard 3.0, UTF-8 y finales CRLF | 202 bytes |
@@ -27,7 +27,7 @@ No se incorporaron domicilio, precios, horarios ni campos personales no confirma
 
 La tarjeta descargable combina vino `#65283d`, vino oscuro `#20151b`, marfil `#f5f0e8`, Cormorant Garamond y DM Sans. El nombre, teléfono, correo, Instagram, QR y URL aparecen como parte de la imagen. El VCF contiene nombre, teléfono, correo y URL de la tarjeta; no intenta importar el contacto automáticamente.
 
-La imagen social muestra la fotografía profesional real `assets/instagram/6c7e0558e37a9d13-800.webp`, con la cámara visible, junto al nombre y la ubicación. Se conserva el cuadrado completo, con redimensionado proporcional: no se cambió la cara, el color ni el encuadre. La tarjeta emplea esa misma fotografía. Las tipografías se descargaron de Google Fonts y se sirven localmente con sus licencias OFL dentro de `assets/card/fonts/`.
+La imagen social V7 muestra la fotografía profesional real `assets/instagram/6c7e0558e37a9d13-800.webp`, con la cámara visible, encima del nombre y la ubicación. La composición es negra con acentos vino y mantiene todo el texto y el retrato dentro de los 600 píxeles centrales: el recorte cuadrado centrado de 630 × 630 no corta el nombre ni la foto. Se conserva la fotografía cuadrada completa, con redimensionado proporcional: no se cambió la cara, el color ni el encuadre. La tarjeta descargable emplea esa misma fotografía y no se modificó. Las tipografías se descargaron de Google Fonts y se sirven localmente con sus licencias OFL dentro de `assets/card/fonts/`.
 
 ## Generación reproducible
 
@@ -36,9 +36,12 @@ El generador es `scripts/build-brand-assets.py`. Utiliza Pillow para la composic
 ```sh
 python scripts/build-brand-assets.py
 python scripts/build-brand-assets.py --site-url https://tu-dominio.com/
+python scripts/build-brand-assets.py --social-only
 ```
 
 Requiere Pillow y ReportLab instalados en el entorno Python. La opción de base pública admite una subcarpeta y vuelve a generar los dos QR, la URL impresa de la tarjeta, la URL del VCF y el manifiesto. El HTML y sus metadatos se actualizan por separado mediante la configuración del sitio. Si cambia el dominio, hay que regenerar y redistribuir las tarjetas descargables; un QR ya impreso conserva su destino anterior.
+
+`--social-only` actualiza exclusivamente el JPEG social y su manifiesto. Antes comprueba que la URL y los hashes de QR, tarjeta y VCF coincidan con la entrega verificada; así conserva su evidencia de decodificación sin regenerarlos. Si cambió el dominio o alguno de esos archivos, exige una generación completa. La imagen anterior se conserva disponible para enlaces o cachés antiguos, pero las páginas ya no la anuncian.
 
 La verificación independiente es opcional al generar, con `zxing-cpp` disponible:
 
@@ -65,6 +68,8 @@ El resultado y los hashes SHA-256 quedan en `assets/card/manifest.json`. La vari
 
 Para el panel del footer, enlazar `tarjeta.html`, mostrar `assets/card/alexa-lara-qr.svg` y ofrecer la descarga de `assets/card/alexa-lara-tarjeta.png`. Mantener un enlace de texto al destino para quien no escanee el QR.
 
-La página de tarjeta incorpora canonical, Open Graph, dimensiones de la imagen y Twitter Card de tipo `summary_large_image`. La imagen social para la portada principal es `https://ozzy-barbosa.github.io/alexa-lara/assets/card/alexa-lara-social.jpg`; debe usarse en sus propios metadatos. Las plataformas pueden conservar una vista previa anterior en caché.
+La portada y la tarjeta incorporan canonical, Open Graph, URL HTTPS de imagen, dimensiones, texto alternativo y Twitter Card de tipo `summary_large_image`. Ambas usan `https://ozzy-barbosa.github.io/alexa-lara/assets/card/alexa-lara-social-v7.jpg`. La portada anuncia el título breve «Alexa Lara | Fotografía», sin modificar su título SEO ni el contenido visible del sitio. Se revisaron la imagen horizontal, el recorte cuadrado central y una miniatura de 112 píxeles; son pruebas de encuadre, no capturas ni envíos reales desde WhatsApp o Messenger.
+
+Las propiedades siguen el [protocolo oficial Open Graph](https://ogp.me/#structured). Cada aplicación decide el formato y puede conservar una vista previa anterior. El nuevo nombre de archivo permite identificar esta versión, pero no fuerza la actualización de mensajes existentes. Compartir preferentemente la URL raíz `https://ozzy-barbosa.github.io/alexa-lara/`; `#inicio` es un ancla del sitio, no una nueva imagen social.
 
 Estos recursos fueron generados y verificados localmente y después publicados en GitHub Pages. La tarjeta, los archivos descargables y la imagen social respondieron HTTP 200; QR, PNG, JPG y VCF coincidieron byte a byte con los originales verificados. El destino del QR se abrió en el navegador público y la tarjeta se revisó en móvil. El PNG y el VCF se descargaron correctamente desde la página local durante el QA; no se importó el contacto a una agenda ni se probó con una cámara física. Algunos navegadores permiten visualizar el PNG o VCF antes de guardarlo. Véase `PUBLICACION.md` para la versión comprobada.

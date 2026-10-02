@@ -29,15 +29,15 @@
       "width": 1080,
       "height": 1350
     },
-    "alexa-lara-social.jpg": {
-      "bytes": 117131,
-      "sha256": "13620cb5d8036be5efae8975f1174e61b62b9fa6afe7932f3ef551293829cc27",
-      "width": 1200,
-      "height": 630
-    },
     "alexa-lara.vcf": {
       "bytes": 202,
       "sha256": "d97be957da703a07b7846f0c8ceb340c3abbcc0e54ad9289e648390f9738d3ba"
+    },
+    "alexa-lara-social-v7.jpg": {
+      "bytes": 92514,
+      "sha256": "3c158a07cef29922228e54033cf4ab39fc7f48c7387a79e53e7935161cd688a1",
+      "width": 1200,
+      "height": 630
     }
   },
   "independentDecode": [
@@ -51,5 +51,12 @@
       "decoder": "ZXing-C++",
       "decoded": "https://ozzy-barbosa.github.io/alexa-lara/tarjeta.html"
     }
-  ]
+  ],
+  "socialSafeArea": {
+    "x": 300,
+    "y": 0,
+    "width": 600,
+    "height": 630,
+    "note": "All text and the complete portrait remain inside a centred square crop."
+  }
 }

@@ -22,6 +22,7 @@ CARD_URL = "https://ozzy-barbosa.github.io/alexa-lara/tarjeta.html"
 PORTFOLIO_URL = "https://ozzy-barbosa.github.io/alexa-lara/"
 INSTAGRAM_URL = "https://www.instagram.com/aleroblesfotografia/"
 PHOTO = ROOT / "assets" / "instagram" / "6c7e0558e37a9d13-800.webp"
+SOCIAL_FILE = "alexa-lara-social-v7.jpg"
 WINE = "#65283d"
 DARK = "#20151b"
 IVORY = "#f5f0e8"
@@ -121,21 +122,37 @@ def card_image(matrix):
 
 
 def social_image():
-    image = Image.new("RGB", (1200, 630), DARK)
+    # Native, editable graphic layout. Keep the unmodified portrait and every
+    # word inside the central 600px so a centred square crop retains both.
+    image = Image.new("RGB", (1200, 630), "#111314")
     draw = ImageDraw.Draw(image)
-    draw.rectangle((0, 0, 652, 630), fill=WINE)
-    draw.line((56, 60, 595, 60), fill="#aa7b89", width=1)
-    label(draw, "FOTOGRAFÍA", (61, 91), size=19, spacing=6, fill=IVORY)
-    draw.text((55, 162), "Alexa Lara", font=font(115, serif=True), fill=IVORY)
-    draw.text((61, 320), "Retratos. Historias. Una mirada propia.", font=font(27), fill=IVORY)
-    draw.text((61, 376), "La Paz & Ensenada", font=font(24), fill="#ead8de")
-    draw.line((61, 492, 589, 492), fill="#aa7b89", width=1)
-    draw.text((61, 522), "CONOCE EL PORTAFOLIO", font=font(20, medium=True), fill=IVORY)
-    # The supplied 765px square is shown in full, with no compositional crop.
+    draw.rectangle((0, 0, 18, 629), fill=WINE)
+    draw.rectangle((1181, 0, 1199, 629), fill=WINE)
+    draw.rectangle((47, 39, 1152, 590), outline="#493038", width=1)
+    # Only decorative lines occupy the outer wings of the wide card.
+    draw.line((97, 315, 332, 315), fill="#8e4c62", width=2)
+    draw.line((868, 315, 1103, 315), fill="#8e4c62", width=2)
+    draw.rectangle((384, 14, 815, 433), fill="#111314")
+    draw.rectangle((391, 18, 808, 435), outline="#8e4c62", width=2)
     with Image.open(PHOTO) as original:
-        photo = original.convert("RGB").resize((500, 500), Image.Resampling.LANCZOS)
-    image.paste(photo, (674, 65))
-    image.save(OUT / "alexa-lara-social.jpg", quality=93, subsampling=0, optimize=True)
+        photo = original.convert("RGB").resize((400, 400), Image.Resampling.LANCZOS)
+    image.paste(photo, (400, 27))
+    name_font = font(108, serif=True)
+    assert draw.textlength("Alexa Lara", font=name_font) < 570
+    draw.text((600, 439), "Alexa Lara", font=name_font, fill=IVORY, anchor="mt")
+    draw.text((600, 552), "F O T O G R A F Í A", font=font(23, medium=True), fill="#d6a8b7", anchor="mt")
+    draw.rectangle((471, 584, 729, 608), fill="#111314")
+    draw.text((600, 587), "La Paz · Ensenada", font=font(21), fill="#e2dcd6", anchor="mt")
+    image.save(OUT / SOCIAL_FILE, quality=93, subsampling=0, optimize=True)
+
+
+def file_entry(name):
+    path = OUT / name
+    entry = {"bytes": path.stat().st_size, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+    if path.suffix in {".jpg", ".png"}:
+        with Image.open(path) as image:
+            entry["width"], entry["height"] = image.size
+    return entry
 
 
 def contact_file():
@@ -165,6 +182,7 @@ def main():
     global CARD_URL, PORTFOLIO_URL
     parser = argparse.ArgumentParser()
     parser.add_argument("--verify", action="store_true", help="Independently decode PNG QR and complete card using zxing-cpp.")
+    parser.add_argument("--social-only", action="store_true", help="Update only the share image; preserve the verified QR, card and contact.")
     parser.add_argument("--site-url", default=PORTFOLIO_URL, help="Absolute public site root, including an optional subdirectory.")
     options = parser.parse_args()
     parsed = urlsplit(options.site_url)
@@ -173,6 +191,23 @@ def main():
     PORTFOLIO_URL = options.site_url.rstrip("/") + "/"
     CARD_URL = urljoin(PORTFOLIO_URL, "tarjeta.html")
     OUT.mkdir(parents=True, exist_ok=True)
+    if options.social_only:
+        manifest = json.loads((OUT / "manifest.json").read_text(encoding="utf-8"))
+        if manifest["cardUrl"] != CARD_URL or manifest["portfolioUrl"] != PORTFOLIO_URL:
+            parser.error("A domain change requires a full build, not --social-only.")
+        # Retain independent QR evidence only when all underlying bytes match.
+        for name in ["alexa-lara-qr.svg", "alexa-lara-qr.png", "alexa-lara-tarjeta.png", "alexa-lara.vcf"]:
+            if manifest["files"][name] != file_entry(name):
+                parser.error(f"{name} changed; run a full verified build first.")
+        social_image()
+        manifest["files"].pop("alexa-lara-social.jpg", None)
+        manifest["files"][SOCIAL_FILE] = file_entry(SOCIAL_FILE)
+        manifest["socialSafeArea"] = {"x": 300, "y": 0, "width": 600, "height": 630, "note": "All text and the complete portrait remain inside a centred square crop."}
+        if options.verify:
+            manifest["independentDecode"] = verify_decode()
+        (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        print(json.dumps(manifest, indent=2, ensure_ascii=False))
+        return
     matrix = get_matrix()
     save_qr(matrix)
     card_image(matrix)
@@ -185,15 +220,11 @@ def main():
         "qr": {"moduleCount": len(matrix), "quietZoneModules": 4, "errorCorrection": "M"},
         "photo": str(PHOTO.relative_to(ROOT)).replace("\\", "/"),
         "photoTreatment": "Complete square, proportionally resized; no crop or color edits.",
+        "socialSafeArea": {"x": 300, "y": 0, "width": 600, "height": 630, "note": "All text and the complete portrait remain inside a centred square crop."},
         "files": {},
     }
-    for name in ["alexa-lara-qr.svg", "alexa-lara-qr.png", "alexa-lara-tarjeta.png", "alexa-lara-social.jpg", "alexa-lara.vcf"]:
-        path = OUT / name
-        entry = {"bytes": path.stat().st_size, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
-        if path.suffix in {".jpg", ".png"}:
-            with Image.open(path) as image:
-                entry["width"], entry["height"] = image.size
-        manifest["files"][name] = entry
+    for name in ["alexa-lara-qr.svg", "alexa-lara-qr.png", "alexa-lara-tarjeta.png", SOCIAL_FILE, "alexa-lara.vcf"]:
+        manifest["files"][name] = file_entry(name)
     if options.verify:
         manifest["independentDecode"] = verify_decode()
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

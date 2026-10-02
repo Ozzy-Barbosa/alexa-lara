@@ -148,15 +148,22 @@ function jpegDimensions(filename) {
   }
   assert.fail("No se encontraron las dimensiones de la imagen social.");
 }
-assert.deepEqual(jpegDimensions("assets/card/alexa-lara-social.jpg"), { width: 1200, height: 630 }, "El archivo social debe medir 1200 × 630.");
+assert.deepEqual(jpegDimensions("assets/card/alexa-lara-social-v7.jpg"), { width: 1200, height: 630 }, "El archivo social debe medir 1200 × 630.");
 for (const filename of ["index.html", "tarjeta.html"]) {
   const document = documents.get(filename);
-  const socialURL = new URL("assets/card/alexa-lara-social.jpg", base).href;
+  const socialURL = new URL("assets/card/alexa-lara-social-v7.jpg", base).href;
   assert.equal(meta(document, "og:image"), socialURL, "Imagen Open Graph incoherente: " + filename);
+  assert.equal(meta(document, "og:image:secure_url"), socialURL, "Imagen HTTPS de Open Graph incoherente: " + filename);
+  assert(meta(document, "og:image:alt")?.trim(), "Falta una descripción de la imagen Open Graph: " + filename);
   assert.equal(meta(document, "twitter:image"), socialURL, "Imagen Twitter incoherente: " + filename);
+  assert(meta(document, "twitter:image:alt")?.trim(), "Falta una descripción de la imagen Twitter: " + filename);
   assert.equal(meta(document, "og:image:width"), "1200", "Ancho social incorrecto: " + filename);
   assert.equal(meta(document, "og:image:height"), "630", "Alto social incorrecto: " + filename);
   assert.equal(meta(document, "og:image:type"), "image/jpeg", "Tipo social incorrecto: " + filename);
+  const imageMetadata = tags(document, "meta").filter(tag => tag.property === "og:image" || tag.property?.startsWith("og:image:"));
+  assert.equal(imageMetadata[0]?.property, "og:image", "Las propiedades de la imagen deben seguir a og:image: " + filename);
+  assert.equal(new Set(imageMetadata.map(tag => tag.property)).size, imageMetadata.length, "Metadatos de imagen duplicados: " + filename);
+  assert(!document.includes("assets/card/alexa-lara-social.jpg"), "Queda la miniatura anterior en los metadatos: " + filename);
   checkLocalReference(socialURL, filename, true);
 }
 assert(!/example\.com/.test(read("robots.txt")), "Robots conserva un dominio ficticio.");
